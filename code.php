@@ -199,6 +199,157 @@
     $tc = 24;
     echo '24 градусов Цельсия это ' . (($tc * 9/5) + 32)  . ' по Фаренгейту' . '<br>';
 
+    echo '<h3>Массивы</h3>';
+    $arr = [1, 2, 3];
+    echo $arr  . '<br>';
+    var_dump($arr);
+    echo '<br>';
+
+    $arr = ['a', 'b', 'c'];
+    echo $arr[0]  . '<br>';
+    echo $arr[1]  . '<br>';
+    echo $arr[2]  . '<br>';
+
+    $arr = ['a', 'b', 'c', 'd'];
+    echo $arr[0] . '+' . $arr[1] . '+' . $arr[2] . '+' . $arr[3] . '<br>';
+
+    $arr = [1, 2, 3];
+    echo $arr[0] + $arr[1] + $arr[2]  . '<br>';
+
+    $arr = [2, 5, 3, 9];
+    $res = ($arr[0] * $arr[1]) + ($arr[2] * $arr[3])  . '<br>'; 
+    echo $res;
+
+    echo '<h3>Ассоциативные массивы в PHP</h3>';
+    $arr = [1 => 'a', 2 => 'b', 3 => 'c'];
+    var_dump($arr);
+    echo '<br>';
+
+    $arr = [1 => 'январь', 'февраль','март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь']; 
+    var_dump($arr);
+    echo '<br>';
+
+    $user = ['name' => 'Иван', 'surname' => 'Иванов', 'patronymic' => 'Иванович'];
+    echo $user['surname'] . ' ' . $user['name'] . ' ' . $user['patronymic'] . '<br>';
+
+    $date = ['year' => 2023, 'month' => 10, 'day' => 5];
+    echo $date['year'] . '-' . $date['month'] . '-' . $date['day'] . '<br>';
+
+    $arr = [2 => 'b', 3 => 'c', 1 => 'a'];
+    echo $arr[1], $arr[2], $arr[3] . '<br>';
+
+    echo '<h3>Длина массива</h3>';
+
+    $arr = ['a', 'b', 'c', 'd', 'e'];
+    echo count($arr) . '<br>';
+
+    $arr = ['a' => 1, 'b' => 2, 'c' => 3, 'd' => 4];
+    echo count($arr) . '<br>';
+
+    $arr = ['a', 'b', 'c', 'd', 'e'];
+    echo $arr[count($arr)-1] . '<br>';
+
+    $arr = ['a', 'b', 'c', 'd', 'e'];
+    echo $arr[count($arr)-2] . '<br>';
+
+    echo '<h3>Изменение и добавление элементов массива</h3>';
+
+    $arr = ['a' => 1, 'b' => 2, 'c' => 3];
+    $arr['a'] = 10;
+    $arr['b'] = 20;
+    $arr['c'] = 30;
+    var_dump($arr); 
+    echo '<br>';
+
+    $arr = ['a' => 1, 'b' => 2, 'c' => 3];
+    $arr['a'] += 3;
+    $arr['b'] += 3;
+    $arr['c'] += 3;
+    var_dump($arr); 
+    echo '<br>';
+
+    $arr = [];
+    $arr[] = 1;
+    $arr[] = 2;
+    $arr[] = 3;
+    $arr[] = 4;
+    $arr[] = 5;
+    var_dump($arr); 
+    echo '<br>';
+
+    $arr = [1, 2, 3];
+    $arr[] = 4;
+    $arr[] = 5;
+    var_dump($arr); 
+    echo '<br>';
+
+    $arr = [];
+    $arr['year'] = 2023;
+    $arr['month'] = 10;
+    $arr['day'] = 5;
+    var_dump($arr); 
+    echo '<br>';
+
+    echo '<h3>Ключи из переменных</h3>';
+    $arr = [1, 2, 3, 4, 5];
+    $key1 = 1;
+    $key2 = 2;
+    echo $arr[$key1] + $arr[$key2] . '<br>';
+
+    $arr = ['a' => 1, 'b' => 2, 'c' => 3];
+    $key = 'b';
+    echo $arr[$key] . '<br>'; 
+
+    echo '<h3>Условия</h3>';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
