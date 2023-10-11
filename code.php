@@ -1796,7 +1796,7 @@
     }   
     echo '<br>';
 
-    $arr = [
+    $arr = [ // Номер 3
         '2019-12-29'=> ['name1', 'name2', 'name3', 'name4'],
         '2019-12-30'=> ['name5', 'name6', 'name7'],
         '2019-12-31'=> ['name8', 'name9'],
@@ -1809,6 +1809,277 @@
     }
     var_dump($new_arr);
     echo '<br>';
+
+
+
+            /* ---------- Глава шестая - Стандартные функции ---------- */
+
+// Математические функции
+echo '<h3>Математические функции</h3>'; 
+
+    echo pow(2, 10) . '<br>'; // Номер 1
+
+    echo sqrt(245) . '<br>'; // Номер 2
+
+    $arr = [4, 2, 5, 19, 13, 0, 10]; // Номер 3
+    $pow_sum = 0;
+    foreach($arr as $elem) {
+        $pow_sum += pow($elem, 2);
+    }
+    echo sqrt($pow_sum) . '<br>';
+
+    echo round(sqrt(379), 0) . '<br>';  // Номер 4
+    echo round(sqrt(379), 1) . '<br>';
+    echo round(sqrt(379), 2) . '<br>';
+
+    $floor = floor(sqrt(578));  // Номер 5
+    $ceil = ceil(sqrt(578));
+    $res = [];
+    $res['floor'] = $floor;
+    $res['ceil'] = $ceil;
+    var_dump($res);
+    echo "<br>";
+
+    $arr = [4, -2, 5, 19, -130, 0, 10]; // Номер 6
+    echo min($arr) . '<br>';
+    echo max($arr) . '<br>';
+
+    echo mt_rand(1, 100) . '<br>'; // Номер 7
+
+    for ($i = 0; $i < 10; $i++) { // Номер 8
+        $num = mt_rand(1,100);
+        $arr[$i] = $num;
+    }
+    var_dump($arr);
+    echo '<br>';
+
+    $a = -50;
+    $b = 10;
+    echo abs($a - $b) . '<br>';
+
+// Строковые функции PHP
+    echo '<h3>Строковые функции PHP</h3>'; 
+
+    $str = 'php'; // Номер 1
+    echo strtoupper($str)  . '<br>';
+
+    $str = 'PHP'; // Номер 2
+    echo strtolower($str)  . '<br>';
+
+    $str = 'london'; // Номер 3
+    echo ucfirst($str)  . '<br>';
+ 
+    $str = 'London'; // Номер 4
+    echo lcfirst($str)  . '<br>';
+
+    $str = 'london is the capital of great britain'; // Номер 5
+    echo ucwords($str)  . '<br>';
+
+    $str = 'LONDON'; // Номер 6
+    echo ucfirst(strtolower($str))  . '<br>';
+
+    $str = 'html css php'; // Номер 7
+    echo strlen($str)  . '<br>';
+
+    $password = 'Пароль'; // Номер 8
+    if (mb_strlen($password) > 5 and mb_strlen($password) < 10) {
+        echo 'Пароль подходит'  . '<br>';
+    } else {
+        echo 'Придумайте другой пароль'  . '<br>';
+    }
+
+    $str = 'html css php'; // Номер 9
+    echo substr($str, 0, 4)  . ', ';
+    echo substr($str, 5, 3)  . ', ';
+    echo substr($str, 9, 3)  . '<br>';
+
+    $str = 'It is a string'; // Номер 10
+    echo substr($str, -3, 3)  . '<br>';
+
+    $str = 'http://page.com'; // Номер 11
+    if (substr($str, 0, 7) == 'http://') {
+        echo 'Строка начинается на "http://"'  . '<br>';
+    } else {
+        echo 'Строка не начинается на "http://"'  . '<br>';
+    }
+
+    $str = 'https://page.com'; // Номер 12
+    if (substr($str, 0, 7) == 'http://' or substr($str, 0, 8) == 'https://') {
+        echo 'Строка начинается на "http://" или на "https://"'  . '<br>';
+    } else {
+        echo 'Строка не начинается на "http://" или на "https://"'  . '<br>';
+    }
+
+    $str = 'image.png'; // Номер 13
+    if (substr($str, -4, 4) == '.png') {
+        echo 'Строка заканчивается на ".png"'  . '<br>';
+    } else {
+        echo 'Строка не заканчивается на ".png"'  . '<br>';
+    }
+
+    $str = 'image.jpg'; // Номер 14
+    if (substr($str, -4, 4) == '.png' or substr($str, -4, 4) == '.jpg') {
+        echo 'Строка заканчивается на ".png" или на ".jpg"'  . '<br>';
+    } else {
+        echo 'Строка не заканчивается на ".png" или на ".jpg"'  . '<br>';
+    }
+
+    $str = 'Ivanov Ivan Ivanovich'; // Номер 15
+    if (strlen($str) >= 5) {
+        echo substr($str, 0, 5) . '...'  . '<br>';
+    } else {
+        echo $str   . '<br>';
+    }
+
+    $str = '31.12.2013'; // Номер 16
+    echo str_replace('.', '-', $str)  . '<br>';
+
+    $str = 'aaa bbb ccc ddd'; // Номер 17
+    echo str_replace(['a', 'b', 'c'], ['1', '2', '3'], $str)  . '<br>';
+
+    $str = '1a2b3c4b5d6e7f8g9h0'; // Номер 18
+    echo str_replace([1, 2, 3, 4, 5, 6, 7, 8, 9, 0], '', $str)  . '<br>';
+
+    $str = 'aaa bbb ccc ddd'; // Номер 19
+    echo strtr($str, ['a' => 1, 'b' => 2, 'c' => 3])  . '<br>';
+    echo strtr($str, 'abc', 123)  . '<br>';
+
+    $str = 'Ivanov Ivan Ivanovich'; // Номер 20
+    echo substr_replace($str, '!!!', 3, 5)  . '<br>';
+
+    $str = 'abc abc abc'; // Номер 21
+    echo strpos($str, 'b')  . '<br>';
+
+    $str = 'abc abc abc'; // Номер 22
+    echo strrpos($str, 'b')  . '<br>';
+
+    $str = 'abc abc abc'; // Номер 23
+    echo strpos($str, 'b', 3)  . '<br>';
+
+    $str = 'aaa aaa aaa aaa aaa'; // Номер 24
+    $index_first_space = strpos($str, ' ');
+    echo strpos($str, ' ', $index_first_space + 1)  . '<br>';
+
+    $str = 'Ivan .. Ivanov'; // Номер 25
+    if (strpos($str, '..')) {
+        echo 'В строке есть две точки подряд'  . '<br>';
+    } else {
+        echo 'В строке нет двух точек подряд'  . '<br>';
+    }
+
+    $str = 'http://page.com'; // Номер 26
+    if (strpos($str, 'http://') === 0) {
+        echo 'Строка начинается с "http://"'  . '<br>';
+    } else {
+        echo 'Строка не начинается с "http://"'  . '<br>';
+    }   
+
+    $str = 'html css php';
+    var_dump(explode( ' ', $str)); // Номер 27
+    echo '<br>';
+
+    $arr = ['html', 'css', 'php'];
+    echo implode( ', ', $arr)  . '<br>';; // Номер 28
+
+    $data = '11-08-2023';
+    $arr_data = explode( '-', $data); // Номер 29
+    echo implode('.', $arr_data) . '<br>';
+
+    $str = '1234567890'; // Номер 30
+    var_dump(str_split($str, 2));
+    echo '<br>';
+
+    $str = '1234567890'; // Номер 31
+    var_dump(str_split($str, 1));
+    echo '<br>';
+
+    $str = '1234567890'; // Номер 32
+    $arr = str_split($str, 2);
+    echo implode('-', $arr) . '<br>';
+
+    $str = 'qwerty   '; // Номер 33
+    echo rtrim($str, ' ') . '<br>';
+
+    $str = '/php/'; // Номер 34
+    echo trim($str, '/') . '<br>';
+
+    $str = 'слова слова слова'; // Номер 35
+    rtrim($str, '.') . '<br>';
+    echo (rtrim($str, '.')) . '.';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
