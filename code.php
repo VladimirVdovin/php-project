@@ -1812,10 +1812,10 @@
 
 
 
-            /* ---------- Глава шестая - Стандартные функции ---------- */
+        /* ------- Глава шестая - Стандартные функции ------- */
 
 // Математические функции
-echo '<h3>Математические функции</h3>'; 
+    echo '<h3>Математические функции</h3>'; 
 
     echo pow(2, 10) . '<br>'; // Номер 1
 
@@ -2006,6 +2006,661 @@ echo '<h3>Математические функции</h3>';
     $str = 'слова слова слова'; // Номер 35
     rtrim($str, '.') . '<br>';
     echo (rtrim($str, '.')) . '.';
+    echo '<br>';
+
+    $str = '12345'; // Номер 36
+    echo strrev($str) . '<br>';
+
+    $str = '12321'; // Номер 37
+    if ($str === strrev($str)) {
+        echo 'Слово ' . $str . ' является палиндромом' . '<br>';
+    } else {
+        echo 'Слово ' . $str . ' не является палиндромом' . '<br>';
+    }
+
+    $str = 'Ivanov Ivan Ivanovich'; // Номер 38
+    echo str_shuffle($str) . '<br>';
+
+    $alphabet = implode('', range('a', 'z')); // Номер 39
+    $str = '';
+    for ($i = 0; $i < 6; $i++) {
+        $shuffle = str_shuffle($alphabet);
+        if (strpos($str, $shuffle[0]) === false) {
+            $str .= $shuffle[0];
+        }
+    }
+    echo $str . '<br>';
+
+    $str = '12345678'; // Номер 40
+    echo number_format($str, 0, ',', ' ') . '<br>';
+
+    $str = 'x'; // Номер 41
+    for ($i = 1; $i <= 9; $i++) {
+        echo str_repeat($str, $i) . '<br>';
+    }
+
+    for ($i = 1; $i <= 9; $i++) { // Номер 42
+        echo str_repeat($i, $i) . '<br>';
+    }
+
+    $str = 'html, <b>php</b>, js'; // Номер 43
+    echo strip_tags($str) . '<br>';
+
+    $str = '<h2>php</h2><b>php</b><i>php</i>'; // Номер 44
+    echo strip_tags($str, '<b><i>') . '<br>';
+
+    $str = 'html, <b>php</b>, js'; // Номер 45
+    echo htmlspecialchars($str) . '<br>';
+
+    echo ord('a') . '<br>'; // Номер 46
+    echo ord('b') . '<br>';
+    echo ord('c') . '<br>';
+
+    echo 'Буквы латинского алфавита располагаются ' .  // Номер 47
+    'в таблице ASCII от ' . ord('a') . ' ("a") ' . 'до ' . 
+    ord('z') . ' ("z") ' . '<br>';
+
+    echo chr(33) . '<br>'; // Номер 48
+
+    echo chr(mt_rand(65, 90)) . '<br>';  // Номер 49
+
+    $str = ''; // Номер 50
+    $len = 10;
+    for ($i = 1; $i <= $len; $i++) {
+        $str .= chr(mt_rand(97, 122));
+    }
+    echo $str . '<br>';
+
+    $str = 'A'; // Номер 51
+    if (ord($str) >= 65 and ord($str) <= 90) {
+        echo $str . ' - это большая буква' . '<br>';
+    } else {
+        echo $str . ' - это маленькая буква' . '<br>';
+    }
+
+    $str = 'ab-cd-ef'; // Номер 52
+    echo strchr($str, '-') . '<br>';
+
+    $str = 'ab-cd-ef'; // Номер 53
+    echo strrchr($str, '-') . '<br>';
+
+// Функции для массивов в PHP
+    echo '<h3>Функции для массивов в PHP</h3>'; 
+
+    $arr = [1, 2, 3, 4, 5]; // Номер 1
+    if (in_array(3, $arr) === true) {
+        echo 'Цифра 3 есть в массиве' . '<br>'; 
+    }
+
+    $arr = [1, 2, 3, 4, 5]; // Номер 2
+    echo array_sum($arr) . '<br>'; 
+
+    $arr = [1, 2, 3, 4, 5]; // Номер 3
+    echo array_product($arr) . '<br>';
+
+    $arr = [1, 2, 3, 4, 5]; // Номер 4
+    echo array_sum($arr) / count($arr) . '<br>';
+
+    $arr = range(1, 100); // Номер 5
+    var_dump($arr);
+    echo '<br>';
+
+    $arr = range('a', 'z'); // Номер 6
+    var_dump($arr);
+    echo '<br>';
+
+    $arr = range(1, 9); // Номер 7
+    echo implode($arr, '-') . '<br>';
+
+    $arr = range(1, 100); // Номер 8
+    echo array_sum($arr) . '<br>';
+
+    $arr = range(1, 10); // Номер 9
+    echo array_product($arr) . '<br>';
+
+    $arr1 = [1, 2, 3]; // Номер 10
+	$arr2 = ['a', 'b', 'c'];
+    $result = array_merge($arr1, $arr2);
+    var_dump($result);
+    echo '<br>';
+
+    $arr = [1, 2, 3, 4, 5]; // Номер 11
+    $result = array_slice($arr, 1, 3);
+    var_dump($result);
+    echo '<br>';
+
+    $arr = [1, 2, 3, 4, 5]; // Номер 12
+    array_splice($arr, 1, 2);
+    var_dump($arr);
+    echo '<br>';
+
+    $arr = [1, 2, 3, 4, 5]; // Номер 13
+    $result = array_splice($arr, 1, 3);
+    var_dump($result);
+    echo '<br>';
+
+    $arr1 = [1, 2, 3, 4, 5]; // Номер 14
+    $arr2 = ['a', 'b', 'c'];
+    array_splice($arr1, 3, 0, $arr2);
+    var_dump($arr1);
+    echo '<br>';
+
+    $arr = [1, 2, 3, 4, 5]; // Номер 15
+    array_splice($arr, 1, 0, ['a', 'b']);
+    array_splice($arr, 6, 0, ['c']);
+    array_splice($arr, 8, 0, ['e']);
+    var_dump($arr);
+    echo '<br>';
+
+    $arr = ['a' => 1, 'b' => 2, 'c' => 3]; // Номер 16
+    $keys = array_keys($arr);
+    $values = array_values($arr);
+    var_dump($keys);
+    echo '<br>';
+    var_dump($values);
+    echo '<br>';
+
+    $arr1 = ['a', 'b', 'c']; // Номер 17
+	$arr2 = [1, 2, 3];
+    $result = array_combine($arr1, $arr2);
+    var_dump($result);
+    echo '<br>';
+
+    $arr = ['a' => 1, 'b' => 2, 'c' => 3]; // Номер 18
+    $result = array_flip($arr);
+    var_dump($result);
+    echo '<br>';
+
+    $arr = [1, 2, 3, 4, 5]; // Номер 19
+    $result = array_reverse($arr);
+    var_dump($result);
+    echo '<br>';
+
+    $arr = ['a', '-', 'b', '-', 'c', '-', 'd']; // Номер 20
+    $pos = array_search('-', $arr);
+    echo 'Позиция первого элемента "-" ' . $pos . '<br>';
+
+    $arr = ['a', '-', 'b', '-', 'c', '-', 'd']; // Номер 21
+    $pos = array_search('-', $arr);
+    array_splice($arr, $pos, 1);
+    echo 'Элемент "-" удалён: ';
+    var_dump($arr);
+    echo '<br>';
+
+    $arr = ['a', 'b', 'c', 'd', 'e']; // Номер 22
+    $result = array_replace($arr, [0 => "!", 3 => "!!"]);
+    var_dump($result);
+    echo '<br>';
+
+    $arr = ['3'=>'a', '1'=>'c', '2'=>'e', '4'=>'b'];  // Номер 23
+    sort($arr);
+    echo 'По возрастанию элементов: ' . '<br>';
+    var_dump($arr);
+    echo '<br>';
+    
+    rsort($arr);
+    echo 'По убыванию элементов: ' . '<br>';
+    var_dump($arr);
+    echo '<br>';
+    
+    asort($arr);
+    echo 'По возрастанию элементов с сохранением ключей: ' . '<br>';
+    var_dump($arr);
+    echo '<br>';
+    
+    arsort($arr);
+    echo 'По убыванию элементов с сохранением ключей: ' . '<br>';
+    var_dump($arr);
+    echo '<br>';
+    
+    ksort($arr);
+    echo 'По возрастанию ключей: ' . '<br>';
+    var_dump($arr);
+    echo '<br>';
+
+    krsort($arr);
+    echo 'По убыванию ключей: ' . '<br>';
+    var_dump($arr);
+    echo '<br>';
+
+    /*  usort($arr);
+    echo 'По функции по элементам: ' . '<br>';
+    var_dump($arr);
+    echo '<br>';  */
+
+    /* uasort($arr);
+    echo 'По функции по элементам с сохранением ключей: ' . '<br>';
+    var_dump($arr);
+    echo '<br>'; */
+
+    /* uksort($arr);
+    echo 'По функции по ключам: ' . '<br>';
+    var_dump($arr);
+    echo '<br>';  */
+
+    natsort($arr);
+    echo 'Натуральная сортировка: ' . '<br>';
+    var_dump($arr);
+    echo '<br>';
+
+    $arr = ['a' => 1, 'b' => 2, 'c' => 3];   // Номер 24
+    echo array_rand($arr)  . '<br>'; 
+
+    $arr = ['a' => 1, 'b' => 2, 'c' => 3];   // Номер 25
+    echo $arr[array_rand($arr)]  . '<br>'; 
+
+    $arr = [1, 2, 3, 4, 5];   // Номер 26
+    shuffle($arr);
+    var_dump($arr);
+    echo '<br>';
+    echo '<br>';
+
+    $arr = range(1, 25);   // Номер 27
+    shuffle($arr);
+    var_dump($arr);
+    echo '<br>';
+    echo '<br>';
+
+    $arr = range('a', 'z');   // Номер 28
+    shuffle($arr);
+    var_dump($arr);
+    echo '<br>';
+    echo '<br>';
+
+    $arr = [];
+    $elem = '';
+    for ($i = 0; $i < 6; $i++) {   // Номер 29
+        $elem = chr(rand(97, 122));
+        if (!in_array($elem, $arr)) {
+            $arr[$i] = $elem;
+        } else ($i--);
+    }
+    $str = implode($arr);
+    echo $str . '<br>';
+
+    $arr = ['a', 'b', 'c', 'b', 'a']; // Номер 30
+    $unique = array_unique($arr);
+    var_dump($unique);
+    echo '<br>';
+    echo '<br>';
+
+    $arr = [1, 2, 3, 4, 5]; // Номер 31
+    echo array_shift($arr) . ', ';
+    echo array_pop($arr) . ', ';
+    var_dump($arr);
+    echo '<br>';
+    echo '<br>';
+
+    $arr = [1, 2, 3, 4, 5]; // Номер 32
+    echo array_unshift($arr, 0) . ', ';
+    echo array_push($arr, 6) . ', ';
+    var_dump($arr);
+    echo '<br>';
+    echo '<br>';
+
+    $arr = ['a', 'b', 'c']; // Номер 33
+    var_dump(array_pad($arr, 6, '-'));
+    echo '<br>';
+    echo '<br>';
+
+    $arr = array_fill(0, 10, 'x'); // Номер 34
+    var_dump($arr);
+    echo '<br>';
+    echo '<br>';
+
+    $arr = range(0, 24);
+    $chunk = array_chunk($arr, 5); // Номер 35
+    var_dump($chunk);
+    echo '<br>';
+    echo '<br>';
+
+    $arr = ['a', 'b', 'c', 'b', 'a'];  // Номер 36
+    var_dump(array_count_values($arr));
+    echo '<br>';
+    echo '<br>';
+
+    $arr = [1, 2, 3, 4, 5];  // Номер 37
+    var_dump(array_map('sqrt', $arr));
+    echo '<br>';
+    echo '<br>';
+
+    $arr1 = [1, 2, 3, 4, 5]; // Номер 38
+	$arr2 = [3, 4, 5, 6, 7];
+    $new_arr = array_intersect($arr1, $arr2);
+    var_dump($new_arr);
+    echo '<br>';
+    echo '<br>';
+
+    $arr1 = [1, 2, 3, 4, 5]; // Номер 39
+	$arr2 = [3, 4, 5, 6, 7];
+    $new_arr = array_diff($arr1, $arr2);
+    var_dump($new_arr);
+    echo '<br>';
+    echo '<br>';
+
+// Функции для времени-даты в PHP
+    echo '<h3>Функции для времени-даты в PHP</h3>'; 
+
+    echo 'Текущее время: ' . time(); // Номер 1
+    echo '<br>';
+
+    echo '1 марта 2025: ' . mktime(0,0,0,3,1,2025);  // Номер 2
+    echo '<br>';
+
+    $current_time = time(); // Номер 3
+    $sec_per_year = 60 * 60 * 24 * 365.25;
+    $full_years_from_1970 = floor($current_time / $sec_per_year);
+    $dec31 = ($full_years_from_1970 * $sec_per_year) + ($sec_per_year - 60 * 60 * 24);
+    echo 'з1 декабря вне записимости от текущей даты и года: ' . $dec31;
+    echo '<br>';
+
+    $current_time = time(); // Номер 4
+    $Match15 = mktime(13,12,59,3,15,2000);
+    echo "Количество секунд, прошедших с 13:12:59 15-го марта 2000: " .
+    ($current_time - $Match15);
+    echo '<br>';
+
+    $current_time = time(); // Номер 5
+    $morninig = mktime(7,23,48,10,16,2023);
+    $full_hours = floor(($current_time - $morninig) / 3600) - 1;  // учитывая часовой пояс
+    echo "Количество полных часов с 7:23:48: " . $full_hours;
+    echo '<br>';
+
+    echo date('Y-m-d H-i-s'); // Номер 6
+    echo '<br>';
+
+    echo date('Y-m-d') . ', '; // Номер 7
+    echo date('d.m.Y') . ', ';
+    echo date('d-m-y') . ', ';
+    echo date('H:i:s');
+    echo '<br>';
+
+    echo date('d.m.Y', mktime(0,0,0,2,12,2025)) . '<br>'; // Номер 8
+
+    $arr = [ 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', // Номер 9
+    'friday', 'saturday'];
+    echo 'Сегодня - ' . $arr[date('w')] . '<br>';
+    echo '06.06.2006 был - ' . $arr[date('w', mktime(0,0,0,6,6,2006))] . '<br>';
+    echo 'Я родился в - ' . $arr[date('w', mktime(0,0,0,6,15,1985))] . '<br>';
+
+    $arr = ['january', 'february', 'march', 'april', // Номер 10
+    'may', 'june', 'july', 'august', 'september', 'october', 'november', 
+    'december'];
+    echo 'Сегодня - ' . $arr[date('n')-1] . '<br>';
+
+    echo 'В текущем месяца - ' . date('t') . ' дней <br>'; // Номер 11
+
+    $date = strtotime('2025-12-31'); // Номер 12
+    echo date('d-m-Y', $date);
+    echo '<br>';
+
+    $date = date_create('2025-12-31'); // Номер 13
+    date_modify($date, '2 days');
+    echo date_format($date, 'd-m-Y') . '<br>';
+    date_modify($date, '1 month 3 days');
+    echo date_format($date, 'd-m-Y') . '<br>';
+    date_modify($date, '1 year');
+    echo date_format($date, 'd-m-Y') . '<br>';
+    date_modify($date, '-3 days');
+    echo date_format($date, 'd-m-Y') . '<br>';
+
+    $now = date('z'); // Номер 14
+    if (date('L') == 0) {
+        echo 'До конца года осталось ' . (365 - $now)  . ' дней <br>';
+    } else {
+        echo 'До конца года осталось ' . (366 - $now)  . ' дней <br>';
+    }
+
+    $year = 2016;  // Номер 15
+    $day = strtotime($year . '-01-01');
+    $last_day = strtotime($year . '-12-31');
+    $amount = 0;
+    while ($day <= $last_day) {
+        if (date('w', $day) == 6 and date('d', $day) == 13) {
+            $amount += 1;
+        }
+        $day = strtotime('+1 day', $day);
+    }
+    echo 'Количество пятниц 13 в ' . $year . ' году: ' . $amount . '<br>'; 
+
+    $now = time(); // Номер 16
+    $hundred_days_ago = strtotime('-100 days', $now);
+    $arr = [ 'воскресенье', 'понедельник', 'вторник', 'среда', 
+    'четверг', 'пятница', 'суббота'];
+    $weekday  = date('w', $hundred_days_ago);
+    echo 'День недели 100 дней назад: ' . $arr[$weekday] . '<br>';
+
+
+// Практика на использования изученных функций
+    echo '<h3>Практика на использования изученных функций</h3>'; 
+
+    $arr = [1, 2, 3, 4, 5]; // Номер 1
+    $averidge = array_sum($arr) / count($arr);
+    echo 'Среднее арифметическое элементо массива: ' . $averidge  . '<br>';
+
+    $arr = range(1, 100); // Номер 2
+    $sum = array_sum($arr);
+    echo "Сумма чисел от 1 до 100: " . $sum . '<br>';
+
+    $arr = range(1, 100); // Номер 3
+    echo 'Столбец чисел от 1 до 10 без цикла: ' . '<br>';
+    echo implode('<br>', $arr);
+    echo '<br>';
+    echo '<br>';
+
+    $arr = array_fill(0, 10, 'x'); // Номер 4
+    echo 'Массив из 10 "x": ';
+    var_dump($arr);
+    echo '<br>';
+    echo '<br>';
+    
+    $arr = range(1, 10); // Номер 5
+    $shuffle = shuffle($arr);
+    echo 'Массив из 10 не повторяющихся числе от 1 до 10: ';
+    var_dump($arr);
+    echo '<br>';
+    echo '<br>';
+
+    $number = 5; // Номер 7
+    $arr = range(1, $number);
+    $factorial = array_product($arr);
+    echo 'Факториал числа ' . $number . ' равен ' . $factorial . '<br>';
+
+    $number = 12345; // Номер 8
+    $str = (string) $number;
+    $arr = explode(', ', $number);
+    $sum = array_sum($arr);
+    echo 'Сумма цифр числа ' . $number . ' равна ' . $sum . '<br>';
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+ 
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
 
 
