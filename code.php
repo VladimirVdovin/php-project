@@ -2466,11 +2466,572 @@
     $factorial = array_product($arr);
     echo 'Факториал числа ' . $number . ' равен ' . $factorial . '<br>';
 
-    $number = 12345; // Номер 8
-    $str = (string) $number;
-    $arr = explode(', ', $number);
+    $number = 123456789; // Номер 8
+    $arr = str_split($number, 1);
     $sum = array_sum($arr);
     echo 'Сумма цифр числа ' . $number . ' равна ' . $sum . '<br>';
+
+    $arr = [4, 9, 16, 25, 36]; // Номер 9
+    $sqrt = array_map('sqrt', $arr);
+    echo 'Массив квадратных корней элементов данного массива: <br>';
+    var_dump($sqrt);
+    echo '<br>';
+    echo '<br>';
+
+    $alphabet = range('a', 'z'); // Номер 10
+    $number = range(1, 26);
+    $arr = array_combine($alphabet, $number);
+    echo 'Массив от 1 до 26, где ключи - буквы, значения - цифры: <br>';
+    var_dump($arr);
+    echo '<br>';
+    echo '<br>';
+
+    $number = '1234567890'; // Номер 11
+    $arr = str_split($number, 1);
+    $sum = array_sum($arr);
+    echo 'Сумма цифр строки "1234567890" равна ' . $sum . '<br>';
+
+    $str = '1234567890'; // Номер 12
+    $arr = str_split($number, 2);
+    $sum = array_sum($arr);
+    echo 'Сумма цифр строки "1234567890" по два символа равна ' . $sum . '<br>';
+    echo '<br>';
+
+    $arr = range(1, 9); // Номер 13
+    $new_arr = array_chunk($arr, 3);
+    var_dump($new_arr);
+    echo '<br>';
+    echo '<br>';
+
+
+            /* ------- Глава седьмая - Пользовательские функции ------- */
+
+
+// Основы работы с пользовательскими функциями
+    echo '<h3>Основы работы с пользовательскими функциями</h3>'; 
+
+    function name() {  // Номер 1
+        echo 'Владимир<br>';
+    }
+    name();
+
+    function sum_1_100() {  // Номер 2
+        $arr = range(1, 100);
+        $sum = array_sum($arr);
+        echo 'Сумма чисел от 1 до 100: ' . $sum . '<br>';
+    }
+    sum_1_100();
+
+// Параметры функций
+    echo '<h3>Параметры функций</h3>'; 
+
+    $number = 3;   // Номер 1
+    function cube($number) {
+        $cube = $number * 3;
+        echo 'Куб числа ' . $number . ' = ' . $cube . '<br>';
+    }
+    cube($number);
+
+    $number = 3;   // Номер 2
+    function positive($number) {
+        if ($number > 0) {
+            echo '+++' . '<br>';
+        } elseif ($number < 0) {
+            echo '---' . '<br>';
+        } else {
+            echo 'Это ноль' . '<br>';
+        }
+    }
+    positive($number);
+
+// Несколько параметров функций
+    echo '<h3>Несколько параметров функций</h3>'; 
+
+    $number1 = 2;  // Номер 1
+    $number2 = 3;
+    function sum_of_numbers($number1, $number2) {
+        $sum = $number1 + $number2;
+        echo $sum . '<br>';
+    }
+    sum_of_numbers($number1, $number2);
+
+// Параметры-переменные функций
+    echo '<h3>Параметры-переменные функций</h3>'; 
+
+    function func_3_param($param1, $param2, $param3) {  // Номер 1
+        $sum = $param1 + $param2 + $param3;
+        echo $sum . '<br>';
+    }
+    $param1 = 1;
+	$param2 = 2;
+	$param3 = 3;
+    func_3_param($param1, $param2, $param3);
+
+// Инструкция return
+    echo '<h3>Инструкция return</h3>'; 
+
+    function cube_res($number) {  // Номер 1 
+        return $number ** 3;
+    }
+    $number = 5;
+    $res = cube_res($number);
+    echo $res . '<br>';
+
+    function cube_sum($number1, $number2) {  // Номер 2
+        return ($number1 ** 3) + ($number2 ** 3);
+    }
+    $number1 = 5;
+    $number2 = 6;
+    $res = cube_sum($number1, $number2);
+    echo $res . '<br>';
+
+// Цикл и return
+    echo '<h3>Цикл и return</h3>'; 
+
+    function func_cycle($num) {   // Номер 1 
+		$sum = 0;
+		
+		for ($i = 1; $i <= $num; $i++) {
+			$sum += $i;
+		}
+        return $sum;
+	}
+	echo func_cycle(5);
+    echo '<br>';
+
+// Применение return в цикле
+    echo '<h3>Применение return в цикле</h3>'; 
+
+    function iterations($number) {   // Номер 1 
+        $i = 0;
+        while (true) {
+            $number /= 2;
+            if ($number < 10) {
+                return $i;
+            }
+            $i++;
+
+        }
+    }
+
+    $number = 100;
+    echo iterations($number);
+    echo '<br>';
+
+// Приемы работы с return в PHP
+    echo '<h3>Приемы работы с return в PHP</h3>'; 
+
+    function func($num1, $num2) {   // Номер 1
+		if ($num1 > 0 and $num2 > 0) {
+			return $num1 * $num2;
+		} else {
+			return $num1 - $num2;
+		}
+	}
+	
+	echo func(3, 4);
+
+// Флаги в функциях
+    echo '<h3>Флаги в функциях</h3>'; 
+
+    function positive_array($arr) {   // Номер 1
+        foreach ($arr as $elem) {
+            if ($elem % 2 !== 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+    $arr = [2, 4, 6, 8, 10];
+    if (positive_array($arr)) {
+        echo 'True';
+    } else {
+        echo 'False';
+    }
+    echo '<br>';
+
+
+    function positive_numbers($number) {   // Номер 2
+        $arr = str_split($number, 1);
+        foreach ($arr as $elem) {
+            if ($elem % 2 === 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+    $number = 135;
+    if (positive_numbers($number)) {
+        echo 'True';
+    } else {
+        echo 'False';
+    }
+    echo '<br>';
+
+
+    function same_numbers($arr) {   // Номер 3
+        for ($i = 0; $i < count($arr)-1; $i++) {
+            if ($arr[$i] === $arr[$i+1]) {
+                return true;
+            }
+        }
+        return false;
+
+    }
+    $arr = [2, 4, 2, 6, 8, 10];
+    if (same_numbers($arr)) {
+        echo 'True';
+    } else {
+        echo 'False';
+    }
+    echo '<br>';
+
+
+// Логические операторы без if в функциях
+    echo '<h3>Логические операторы без if в функциях</h3>'; 
+
+
+    function func_no_if_1($a, $b) {    // Номер 1
+		return ($a === $b);
+	}
+
+    $a = 10; 
+    $b = 10;
+    echo func_no_if_1($a, $b);
+    echo '<br>';
+
+
+    function func_no_if_2($a, $b) {
+		return $a !== $b;
+	}
+
+    $a = 10; 
+    $b = 11;
+    echo func_no_if_2($a, $b);
+    echo '<br>';
+
+
+    function func_no_if_3($a, $b) {
+		return ($a + $b >= 10);
+	}
+
+    $a = 10; 
+    $b = 11;
+    echo func_no_if_3($a, $b);
+    echo '<br>';
+    
+
+    function func_no_if_4($num) {
+		return ($num >= 0);
+	}
+
+    $num = 10; 
+    echo func_no_if_4($num);
+    echo '<br>';
+
+
+// Советы по созданию функций в JavaScript
+    echo '<h3>Советы по созданию функций в JavaScript</h3>';
+
+    
+    function calc_average($arr) {   // Номер 1
+		$res = 0;
+		
+		foreach ($arr as $elem) {
+			$res += $elem;
+		}
+		
+		return $res / count($arr); 
+	} 
+
+    echo calc_average([1, 2, 3]) . '<br>';
+    // изменил название с sum на calc_average
+
+
+    function calc_sum_arr($arr) {  // Номер 2
+		$res = 0;
+		
+		foreach ($arr as $elem) {
+			$res += $elem;
+		}
+        return $res;
+    }
+    
+    function calc_sum_ratio($arr1, $arr2) {
+        $res1 = calc_sum_arr($arr1);
+        $res2 = calc_sum_arr($arr2);
+        return $res1 / $res2;
+    }
+
+
+        echo calc_sum_ratio([1, 2, 3], [4, 5, 6]) . '<br>';
+    // переименовал функцию в calc_sum_ratio
+    // разбил функцию на 2, каждая из которых делает одно дело
+    // исользовать внутри функции вспомогательные функции
+    // вынес дублирующийся код в функцию
+
+
+    function getProduct($arr) {  // Номер 3
+		$res = 1;
+		
+		foreach ($arr as $elem) {
+			$res *= $elem;
+		}
+		
+		return $res;
+	} // изменил название с getSum на getProduct
+
+    echo getProduct([1, 2, 3, 4, 5, 6]) . '<br>';
+
+
+// Практика на функции
+    echo '<h3>Практика на функции</h3>';
+
+
+// Номер 1
+    function getArrayDivisors($number) {  
+        $arr = range(-$number, $number);
+        $result_arr = [];
+        foreach ($arr as $elem) {
+            if (($elem != 0) and ($number % $elem == 0)) {
+                $result_arr[] = $elem;
+            }
+        }
+        return $result_arr;
+    }
+
+    $number = 10;
+    $arr = getArrayDivisors($number);
+    echo 'Массив делителей числа ' . $number . ':<br> ';
+    var_dump($arr);
+    echo '<br>';
+    echo '<br>';
+
+
+// Номер 2
+    function getCommonDivisors($number1, $number2) {  
+        if ($number1 >= $number2) {
+            $arr = range(-$number1, $number1);
+        } else {
+            $arr = range(-$number2, $number2);
+        }
+
+        $result_arr = [];
+        foreach ($arr as $elem) {
+            if (($elem != 0) and ($number1 % $elem == 0) and ($number2 % $elem == 0)) {
+                $result_arr[] = $elem;
+            }
+        }
+        return $result_arr;
+    }
+
+    $number1 = 10;
+    $number2 = 20;
+    $arr = getCommonDivisors($number1, $number2);
+    echo 'Массив общих делителей чисел ' . $number1 . ' и ' . $number2 . ':<br> ';
+    var_dump($arr);
+    echo '<br>';
+    echo '<br>';
+
+
+// Номер 3
+    function calcSumNumbers($number) {  
+        $arr = str_split($number, 1);
+        return array_sum($arr);
+    }
+
+    $number = 123456789;
+    $arr = calcSumNumbers($number);
+    echo 'Сумма цифр числа ' . $number . ' равна ' . $arr .  '<br>';
+    echo '<br>';
+
+// Номер 4
+    function showToday() {  
+        $now = time(); 
+        $arr = [ 'воскресенье', 'понедельник', 'вторник', 'среда', 
+        'четверг', 'пятница', 'суббота'];
+        echo 'Текущий день недели: ' . $arr[date('w', $now)];
+    }
+
+    showToday();
+    echo '<br>';
+    echo '<br>';
+
+
+// Номер 5
+    function showWeekday($date) {  
+        $date = strtotime($date); 
+        $arr = [ 'воскресенье', 'понедельник', 'вторник', 'среда', 
+        'четверг', 'пятница', 'суббота'];
+        return $arr[date('w', $date)];
+    }
+
+    $date = '08-12-2021';
+    echo $date . ' это - ' . showWeekday($date);
+    echo '<br><br>';
+
+
+// Номер 6
+    function convertSecondsToDays($seconds) {  
+        $res = $seconds / (60 * 60 * 24);
+        return round($res, 2);
+    }
+
+    $seconds = 200000;
+    echo $seconds . ' секунд это  ' . convertSecondsToDays($seconds) . ' суток';
+    echo '<br><br>';
+
+
+// Номер 7
+    function checkLeapYear($year) {  
+        $res = strtotime('01-01-' . $year);
+        if (date('L', $res) == 1) {
+            return $year . ' - високосный год<br><br>';
+        }
+        return $year . ' - не високосный год<br><br>';
+    }
+
+    $year = 2008;
+    echo checkLeapYear($year);
+
+
+// Номер 8
+    function checkPrimeNumber($number) {  
+        if ($number % 2 != 0 or $number == 2) {
+            return $number . ' - простое число<br><br>';
+        }
+        return $number . ' - не простое число<br><br>';
+    }
+
+    $number = 11;
+    echo checkPrimeNumber($number);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
