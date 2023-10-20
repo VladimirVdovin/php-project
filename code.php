@@ -2908,6 +2908,152 @@
 
 
 
+    /* ------- Глава восьмая - Рекурсия -------- */
+
+
+// Рекурсия с параметроми
+    echo '<h3>Рекурсия с параметром</h3>';
+    
+
+// Номер 1 
+    $arr = ['a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5];
+    function Recursion($arr) {
+        if (count($arr) > 0) {
+            echo array_shift($arr);
+            Recursion($arr);
+        }
+    }
+
+    Recursion($arr);
+    echo '<br>';
+
+
+// Сумма элементов массива при рекурсии
+    echo '<h3>Сумма элементов массива при рекурсии</h3>';
+
+
+// Номер 1
+    function getSumElem($arr) {
+        $sum = array_shift($arr);
+        if (count($arr) > 0) {
+            $sum += getSumElem($arr);
+        }
+        return $sum;
+    }
+
+    $arr = ['a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5];
+    echo getSumElem($arr);
+    echo '<br>';
+
+
+// Рекурсия и многомерные структуры
+    echo '<h3>Рекурсия и многомерные структуры</h3>';
+
+// Номер 1
+    function findPrimitiveElem($arr) {
+        foreach ($arr as $elem) {
+            if (is_array($elem)) {
+                findPrimitiveElem($elem);
+            } else {
+                echo $elem . " ";
+            }
+        }
+    } 
+
+    $arr = [1, 2, 3, [4, 5, [6, 7]], [8, [9, 10]]];
+    findPrimitiveElem($arr);
+    echo '<br>';
+
+
+// Сумма элементов массива
+    echo '<h3>Сумма элементов массива</h3>';
+
+
+// Номер 1
+    function calcMultiArraySum($arr) {
+        $sum = 0;
+        foreach ($arr as $elem) {
+            if (is_array($elem)) {
+                $sum += calcMultiArraySum($elem);
+            } else {
+                $sum += $elem;
+            }
+        }
+        return $sum;
+    } 
+
+    $arr = [1, 2, 3, [4, 5, [6, 7]], [8, [9, 10]]];
+    echo calcMultiArraySum($arr);
+    echo '<br>';
+
+
+// Номер 2
+    function showStringConcat($arr) {
+        $str = '';
+        foreach ($arr as $elem) {
+            if (is_array($elem)) {
+                $str .= showStringConcat($elem);
+            } else {
+                $str .= $elem;
+            }   
+        }
+        return $str;
+    } 
+
+    $arr = ['a', ['b', 'c', 'd'], ['e', 'f', ['g', ['j', 'k']]]]; 
+    echo showStringConcat($arr);
+    echo '<br>';
+
+
+// Манипуляции с элементами многомерного массива
+    echo '<h3>Манипуляции с элементами многомерного массива</h3>';
+
+
+    function getSquareElements($arr) {
+        for ($i = 0; $i < count($arr); $i++) {
+            if (is_array($arr[$i])) {
+                $arr[$i] = getSquareElements($arr[$i]);
+            } else {
+                $arr[$i] **= 2; 
+            }
+        }
+        return $arr;
+
+    }
+
+    $arr = [1, [2, 7, 8], [3, 4], [5, [6, 7]]];
+    var_dump(getSquareElements($arr));
+    echo '<br><br>';
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
