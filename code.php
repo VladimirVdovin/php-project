@@ -3027,6 +3027,488 @@
 
 
 
+        /* ------- Глава девятая - Pегулярные выражения -------- */
+
+
+// Введение в регулярные выражения
+    echo '<h3>Введение в регулярные выражения</h3>';
+
+    $str = 'ahb acb aeb aeeb adcb axeb'; // Номер 1
+    echo preg_replace('#a.b#', '!', $str);
+    echo '<br>';
+
+    $str = 'ahb acb aeb aeeb adcb axeb'; // Номер 2
+    echo preg_replace('#a..b#', '!', $str);
+    echo '<br>';
+
+
+// Операторы повторения символов в регулярках
+    echo '<h3>Операторы повторения символов в регулярках</h3>';
+
+    $str = 'aa aba abba abbba abca abea'; // Номер 1
+    echo preg_replace('#ab+a#', '!', $str);
+    echo '<br>';
+
+    $str = 'aa aba abba abbba abca abea'; // Номер 2
+    echo preg_replace('#ab*a#', '!', $str);
+    echo '<br>';
+
+    $str = 'aa aba abba abbba abca abea'; // Номер 3
+    echo preg_replace('#ab?a#', '!', $str);
+    echo '<br>';
+
+    $str = 'aa aba abba abbba abca abea'; // Номер 4
+    echo preg_replace('#ab*a#', '!', $str);
+    echo '<br>';
+
+ // Группирующие скобки в регулярках
+    echo '<h3>Группирующие скобки в регулярках</h3>';   
+
+    $str = 'ab abab abab abababab abea'; // Номер 1
+    echo preg_replace('#(ab)+#', '!', $str);
+    echo '<br>';
+
+// Список специальных символов в регулярках
+     echo '<h3>Список специальных символов в регулярках</h3>';   
+
+     $str = 'a.a aba aea'; // Номер 1
+     echo preg_replace('#a\.a#', '!', $str);
+     echo '<br>';
+
+     $str = '2+3 223 2223'; // Номер 2
+     echo preg_replace('#2\+3#', '!', $str);
+     echo '<br>';
+
+     $str = '23 2+3 2++3 2+++3 345 567'; // Номер 3
+     echo preg_replace('#2\++3#', '!', $str);
+     echo '<br>';
+
+     $str = '23 2+3 2++3 2+++3 445 677'; // Номер 4
+     echo preg_replace('#2\+*3#', '!', $str);
+     echo '<br>';
+
+     $str = '*+ *q+ *qq+ *qqq+ *qqq qqq+'; // Номер 5
+     echo preg_replace('#\*q+\+#', '!', $str);
+     echo '<br>';
+
+     $str = '[abc] {abc} abc (abc) [abc]'; // Номер 6
+     echo preg_replace('#\[abc\]#', '!', $str);
+     echo '<br>';
+
+// Фигурные скобки в регулярных выражения
+     echo '<h3>Фигурные скобки в регулярных выражения</h3>';  
+
+     $str = 'aa aba abba abbba abbbba abbbbba';  // Номер 1
+     echo preg_replace('#ab{2,4}a#', '!', $str);
+     echo '<br>';
+
+     $str = 'aa aba abba abbba abbbba abbbbba';  // Номер 2
+     echo preg_replace('#ab{1,3}a#', '!', $str);
+     echo '<br>';
+
+     $str = 'aa aba abba abbba abbbba abbbbba';  // Номер 3
+     echo preg_replace('#ab{4,}a#', '!', $str);
+     echo '<br>';
+
+// Ограничение жадности в регулярках
+     echo '<h3>Ограничение жадности в регулярках</h3>'; 
+
+     $str = 'aba accca azzza wwwwa';  // Номер 1
+     echo preg_replace('#a.+?a#', '!', $str);
+     echo '<br>';
+
+// Группы символов в регулярных выражениях
+     echo '<h3>Группы символов в регулярных выражениях</h3>';
+
+     $str = 'a1a a2a a3a a4a a5a aba aca';  // Номер 1
+     echo preg_replace('#a\da#', '!', $str);
+     echo '<br>';
+
+     $str = 'a1a a22a a333a a4444a a55555a aba aca'; // Номер 2
+     echo preg_replace('#a\d+a#', '!', $str);
+     echo '<br>';
+
+     $str = 'aa a1a a22a a333a a4444a a55555a aba aca';  // Номер 3
+     echo preg_replace('#a\d*a#', '!', $str);
+     echo '<br>';
+
+     $str = 'avb a1b a2b a3b a4b a5b abb acb';  // Номер 4
+     echo preg_replace('#a\Db#', '!', $str);
+     echo '<br>';
+
+     $str = 'ave a#b a2b a$b a4b a5b a-b acb';  // Номер 5
+     echo preg_replace('#a\Wb#', '!', $str);
+     echo '<br>';
+
+     $str = 'ave a#b a2b a$b a4b a5b a-b acb';  // Номер 6
+     echo preg_replace('#\s#', '!', $str);
+     echo '<br>';
+
+// Наборы символов в регулярных выражениях
+     echo '<h3>Наборы символов в регулярных выражениях</h3>';
+
+     $str = 'aba aea aca aza axa';  // Номер 1
+     echo preg_replace('#a[bex]a#', '!', $str);
+     echo '<br>';
+
+     $str = 'a1a a3a a7a a9a aba'; // Номер 2
+     echo preg_replace('#a[3-6]a#', '!', $str);
+     echo '<br>';
+
+     $str = 'aba aea afa aha aga'; // Номер 3
+     echo preg_replace('#a[a-g]a#', '!', $str);
+     echo '<br>';
+
+     $str = 'aba aea afa aha aga'; // Номер 4
+     echo preg_replace('#a[a-fj-z]a#', '!', $str);
+     echo '<br>';
+     
+     $str = 'aAa aea aEa aJa a3a'; // Номер 5
+     echo preg_replace('#a[a-fA-D]a#', '!', $str);
+     echo '<br>';
+
+     $str = 'aAXa aeffa aGha aza ax23a a3sSa'; // Номер 6
+     echo preg_replace('#a[a-z]+a#', '!', $str);
+     echo '<br>';
+
+     $str = 'aAXa aeffa aGha aza ax23a a3sSa'; // Номер 7
+     echo preg_replace('#a[a-zA-Z]+a#', '!', $str);
+     echo '<br>';
+
+     $str = 'aAXa aeffa aGha aza ax23a a3sSa'; // Номер 8
+     echo preg_replace('#a[a-z1-9]+a#', '!', $str);
+     echo '<br>';
+
+// Инвертирование наборов символов в регулярках
+     echo '<h3>Инвертирование наборов символов в регулярках</h3>';
+
+     $str = '1e2 1w2 1f2 1j2 1r1 1x2'; // Номер 1
+     echo preg_replace('#1[^ex]2#', '!', $str);
+     echo '<br>';
+
+     $str = 'x3z x6z x1z x2x x4z x8z'; // Номер 2
+     echo preg_replace('#x[^2-7]z#', '!', $str);
+     echo '<br>';
+
+     $str = 'xWERz xrz xAsd1z x2z xtttyz x8Rz'; // Номер 3
+     echo preg_replace('#x[^A-Z1-9]+z#', '!', $str);
+     echo '<br>';
+
+     $str = 'x8z x99z x"z xAZz xttyz x3z'; // Номер 4
+     echo preg_replace('#x[^A-Z1-5a-z]+z#', '!', $str);
+     echo '<br>';
+
+// Особенности кириллицы в регулярках
+     echo '<h3>Особенности кириллицы в регулярках</h3>';
+
+     $str = 'wйw wяw wёw wqw'; // Номер 1
+     echo preg_replace('#w[а-яё]w#u', '!', $str);
+     echo '<br>';
+
+     $str = 'ааа ббб ёёё ззз ййй ААА  БББ ЁЁЁ ЗЗЗ ЙЙЙ'; // Номер 2
+     echo preg_replace('#[а-яёA-ЯЁ]+#u', '!', $str);
+     echo '<br>';
+
+// Спецсимволы внутри квадратных скобок
+     echo '<h3>Спецсимволы внутри квадратных скобок</h3>';
+
+     $str = 'aba aea aca aza axa a.a a+a a*a'; // Номер 1
+     echo preg_replace('#a[.+*]a#', '!', $str);
+     echo '<br>';
+
+     $str = 'xaz x.z x3z x@z x$z xrz'; // Номер 2
+     echo preg_replace('#x[^@$]z#', '!', $str);
+     echo '<br>';
+
+// Группы символов внутри квадратных скобок
+     echo '<h3>Группы символов внутри квадратных скобок</h3>';
+     
+     $str = '111 22 .... qwe qweee qwrtwqe'; // Номер 1
+     echo preg_replace('#[\d.]+#', '!', $str);
+     echo '<br>';
+
+     $str = '#a&#$%4zeeee^* (## asd7'; // Номер 2
+     echo preg_replace('#[^a-g\d]{3,7}#', '!', $str);
+     echo '<br>';
+
+// Исключения внутри наборов в регулярках
+     echo '<h3>Исключения внутри наборов в регулярках в регулярках</h3>';
+
+     $str = 'x[]z x{}z x.z x()z'; // Номер 1
+     echo preg_replace('#x[\[\]{}()]+z#', '!', $str);
+     echo '<br>';
+
+     $str = '[abc] {abc} abc (abc) [abc]'; // Номер 2
+     echo preg_replace('#[\[\]{}()]abc[\[\]{}()]#', '!', $str);
+     echo '<br>';
+
+// Символ шляпки внутри наборов в регулярках
+     echo '<h3>Символ шляпки внутри наборов в регулярках</h3>';
+
+     $str = '^xx axx ^zz bkk @ss'; // Номер 1
+     echo preg_replace('#[\^@][a-z]{2}#', '!', $str);
+     echo '<br>';
+
+     $str = '^xx axx ^zz bkk @ss'; // Номер 2
+     echo preg_replace('#\s[^\^@][a-z]{2}#', '!', $str);
+     echo '<br>';
+
+     $str = '^xx axx ^zz bkk'; // Номер 3
+     echo preg_replace('#\s[^\^][a-z]{2}#', '!', $str);
+     echo '<br>';
+
+// Дефис внутри наборов в регулярках
+     echo '<h3>Дефис внутри наборов в регулярках</h3>';
+
+     $str = 'xaz xBz xcz x-z x@z'; // Номер 1
+     echo preg_replace('#x[a-zA-z-]z#', '!', $str);
+     echo '<br>';
+
+     $str = 'xaz x$z x-z xcz x+z x%z x*z'; // Номер 2
+     echo preg_replace('#x[$+-]z#', '!', $str);
+     echo '<br>';
+
+     
+// Начало и конец строки в регулярках
+    echo '<h3>Начало и конец строки в регулярках</h3>';
+
+    $str = 'abc def xyz'; // Номер 1
+    echo preg_replace('#^[a-z]{3}#', '!', $str);
+    echo '<br>';
+
+    $str = 'abc def xyz'; // Номер 2
+    echo preg_replace('#[a-z]{3}$#', '!', $str);
+    echo '<br>';
+
+// Начало и конец строки в регулярках
+    echo '<h3>Начало и конец строки в регулярках</h3>';
+
+    $str = 'aaa xaa aaa xbb aaa'; // Номер 1
+    echo preg_replace('#\bx[a-z]*#', '!', $str);
+    echo '<br>';
+
+// Команда 'или' в регулярных выражениях
+    echo '<h3>Команда "или" в регулярных выражениях</h3>';
+
+    $str = 'aeeea aeea aea axa axxa axxxa'; // Номер 1
+    echo preg_replace('#a(e+|x+)a#', '!', $str);
+    echo '<br>';
+
+    $str = 'aeeea aeea aea axa axxa axxxa'; // Номер 1
+    echo preg_replace('#a(e{2}|x+)a#', '!', $str);
+    echo '<br>';
+
+// Команда 'или' в регулярных выражениях
+    echo '<h3>Команда "или" в регулярных выражениях</h3>';
+
+    $str = 'aeeea aeea aea axa axxa axxxa'; // Номер 1
+    echo preg_replace('~a(e{3}|x{3})a~', '!', $str);
+    echo '<br>';
+
+// Экранировка ограничителей
+    echo '<h3>Экранировка ограничителей</h3>';
+
+    echo preg_replace('#a\#b#', '!', 'a#b'); // Номер 1
+    echo '<br>';
+
+// Команда 'или' в регулярных выражениях
+    echo '<h3>Команда "или" в регулярных выражениях</h3>';
+
+    $str = 'aeeea aeea aea axa axxa axxxa'; // Номер 1
+    echo preg_replace('~a(e{3}|x{3})a~', '!', $str);
+    echo '<br>';
+
+// Команда 'или' в регулярных выражениях
+    echo '<h3>Команда "или" в регулярных выражениях</h3>';
+
+    $str = 'a\\b c\\d e\\f'; // Номер 1
+    echo preg_replace('#[a-z]\\\\[a-z]#', '!', $str);
+    echo '<br>';
+
+    $str = 'a\\b c\\\\d e\\\\\\f'; // Номер 2
+    echo preg_replace('#[a-z]\\\\+[a-z]#', '!', $str);
+    echo '<br>';
+
+// Проверка строки с помощью регулярки
+    echo '<h3>Проверка строки с помощью регулярки</h3>';
+
+    echo preg_match('#\d{3}#', '111 ddd ccc' );  // Номер 1
+    echo '<br>';
+
+    echo preg_match('#^http#', 'http//' );  // Номер 2
+    echo '<br>';
+
+    echo preg_match('#^(http|https)#', 'https//index.txt' );  // Номер 3
+    echo '<br>';
+
+    echo preg_match('#(txt|html|php)$#', 'http//index.txt' );  // Номер 4
+    echo '<br>';
+
+    echo preg_match('#(jpg|jpeg)$#', 'http//image.jpg' );  // Номер 5
+    echo '<br>';
+
+// Автоматическое тестирование регулярок
+    echo '<h3>Автоматическое тестирование регулярок</h3>';
+
+    $reg   = '#\d+\.\d+#';  // Номер 1
+	
+	$arr[] = 'aaa 1.5 bbb';   
+	$arr[] = 'aaa 12345 bbb'; 
+	$arr[] = 'aaa 12.87 bbb';  
+	$arr[] = 'aaa 12 bbb';    
+	
+	foreach ($arr as $str) {
+		echo $str . ' ' . preg_match($reg, $str) . '<br>';
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
