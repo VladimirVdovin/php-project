@@ -3351,7 +3351,8 @@
     echo '<h3>Автоматическое тестирование регулярок</h3>';
 
     $reg   = '#\d+\.\d+#';  // Номер 1
-	
+
+    $arr = [];
 	$arr[] = 'aaa 1.5 bbb';   
 	$arr[] = 'aaa 12345 bbb'; 
 	$arr[] = 'aaa 12.87 bbb';  
@@ -3360,6 +3361,304 @@
 	foreach ($arr as $str) {
 		echo $str . ' ' . preg_match($reg, $str) . '<br>';
     }
+
+// Проверка всей строки через регулярки
+    echo '<h3>Проверка всей строки через регулярки</h3>';
+
+// Номер 1
+    $reg = '#^[a-z0-9-_]{1,63}\.[a-z1-9-]{2,24}$#';  
+    
+    $arr = [];
+    $arr[] = 'site.ru';          // +
+	$arr[] = 'site.com';         // +
+	$arr[] = 'my-site.com';      // +
+	$arr[] = 'my-cool-site.com'; // +
+	$arr[] = 'my_site.com';      // +
+	$arr[] = 'site123.com';      // +
+	$arr[] = 'site.travel';      // +
+	$arr[] = 'si$te.com';        // -
+	$arr[] = 'site.r';           // -
+
+    foreach ($arr as $str) {
+        echo $str . ' ' . preg_match($reg, $str)  . '<br>';
+    } 
+    echo '<br>';
+
+// Номер 2
+    $reg = '#^[a-zA-Z0-9-_]{1,63}@[a-zA-Z1-9-]{2,255}\.[a-z1-9-]{2,24}$#';   
+    
+    $arr = [];
+	$arr[] = 'addr@mail.ru';    // +
+	$arr[] = 'addr123@mail.ru'; // +
+	$arr[] = 'my-addr@mail.ru'; // +
+	$arr[] = 'my_addr@mail.ru'; // +
+	$arr[] = 'addr@site.ru';    // +
+	$arr[] = 'addr.ru';         // -
+	$arr[] = 'addr@.ru';        // -
+	$arr[] = 'my@addr@mail.ru'; // -
+
+    foreach ($arr as $str) {
+        echo $str . ' ' . preg_match($reg, $str)  . '<br>';
+    } 
+
+// Проверка всей строки через регулярки
+    echo '<h3>Проверка всей строки через регулярки</h3>';
+
+    $reg = "#^([0-9]{4})\-([0-9]{2})\-([0-9]{2})$#"; // Номер 1
+    $str = '2025-12-31';
+    preg_match($reg, $str, $res);
+    var_dump($res);
+
+    $reg = "#^([a-z]{1,63})\.([a-z]{2,24})$#"; // Номер 2
+    $str = 'index.html';
+    preg_match($reg, $str, $res);
+    var_dump($res);
+
+// Поиск всех совпадений через регулярки
+    echo '<h3>Поиск всех совпадений через регулярки</h3>';
+
+    $reg = "#[0-9]#"; // Номер 1
+    $str = '111 aaaa 22 bbbbb';
+    echo preg_match_all($reg, $str) . '<br>';
+
+// Все совпадения на карманы через регулярки
+    echo '<h3>Все совпадения на карманы через регулярки</h3>';
+
+    $str = '2023-10-29 2024-11-30 2025-12-31'; // Номер 1
+    $reg = '#([0-9]{4})\-([0-9]{2})\-([0-9]{2})#';
+    preg_match_all($reg, $str, $res) . '<br>';
+    var_dump($res);
+
+// Изменение поведения preg_match_all
+    echo '<h3>Изменение поведения preg_match_all</h3>';
+
+    $str = '2023-10-29 2024-11-30 2025-12-31'; // Номер 1
+    $reg = '#([0-9]{4})\-([0-9]{2})\-([0-9]{2})#';
+    preg_match_all($reg, $str, $res, PREG_SET_ORDER) . '<br>';
+    print_r($res);
+
+// Несохраняющие скобки в регулярках
+    echo '<h3>Несохраняющие скобки в регулярках</h3>';
+
+    $str = 'aaa$@bbb aaa$@$@bbb aaa$@$@$@bbb'; // Номер 1
+    $reg = '#([a-z]+)(?:\$\@)+([a-z]+)#';
+    preg_match_all($reg, $str, $res) . '<br>';
+    print_r($res);
+
+// Карманы при замене через регулярки
+    echo '<h3>Карманы при замене через регулярки</h3>';
+
+    $str = '12 34 56 78'; // Номер 1
+    $reg = '#(\d)(\d)#';
+    $res = preg_replace($reg, '$2$1', $str) . '<br>';
+    echo($res);
+
+    $str = '31.12.2025'; // Номер 2
+    $reg = '#(\d{2})\.(\d{2})\.(\d{4})#';
+    $res = preg_replace($reg, '$3.$2.$1', $str) . '<br>';
+    echo($res);
+
+// Карманы в регулярном выражении
+    echo '<h3>Карманы в регулярном выражении</h3>';
+    
+    $str = 'aaa bbb ccc xyz'; // Номер 1
+    $reg = '#([a-z])\1\1#';
+    echo preg_replace($reg, '!', $str) . '<br>';
+
+    $str = 'a aa aaa abab bbbb'; // Номер 2
+    $reg = '#([a-z])\1+#';
+    echo preg_replace($reg, '!', $str) . '<br>';
+
+    $str = 'aaa aaa bbb bbb ccc ddd'; // Номер 3
+    $reg = '#([a-z])\1{2}\s\1{3}#';
+    echo preg_replace($reg, '!', $str) . '<br>';
+
+// Именованные карманы в регулярках
+    echo '<h3>Именованные карманы в регулярках</h3>';
+
+    $str = '12:59:59'; // Номер 1
+    $reg = '#(?<hours>\d{2}):(?<minutes>\d{2}):(?<seconds>\d{2})#';
+    preg_match($reg, $str, $res);
+    print_r($res);
+    echo '<br><br>';
+
+    
+    function delNumPockets($res) {  // Номер 2
+        $new_arr = [];
+        foreach ($res as $key => $value) {
+            if (is_string($key)) {
+                $new_arr[$key] = $value;        
+            }
+        } 
+        return $new_arr;
+    }
+
+    $str = 'Ivanov Ivan is a pilot';
+    $reg = '#(?<surname>[a-zA-Z]+)\s(?<name>[a-zA-Z]+)\s([a-z]+)\s([a-z]+)\s([a-z]+)#';
+    preg_match($reg, $str, $res1);
+    var_dump($res1);
+
+    
+    $new_arr = delNumPockets($res1);
+    echo 'Результат без нумерованных ключей: <br>';
+    print_r($new_arr);
+
+
+// Именованные карманы внутри регулярки
+    echo '<h3>Именованные карманы внутри регулярки</h3>';
+
+    $str = '12:59:59 12:59:12 09:45:09'; // Номер 1
+    $reg = '#(?<hour>\d{2}):\d{2}:\k<hour>#';
+    echo preg_replace($reg, '!', $str) . '<br><br>';
+
+
+// Общий номер карманов в регулярках
+    echo '<h3>Общий номер карманов в регулярках</h3>';
+
+    $reg = '#(\d{2})\-(\d{2})\-(?|19(9\d)|20(\d\d))#';  // Номер 1
+
+    $arr = [
+		'31-12-2025',
+		'30-11-1995',
+		'29-10-1990',
+	];
+
+    foreach ($arr as $elem) {
+        preg_match($reg, $elem, $res);
+        print_r($res);
+        echo '<br>';
+    } 
+
+
+// Позитивный и негативный просмотр
+    echo '<h3>Позитивный и негативный просмотр</h3>'; 
+
+    $str = 'func1() func2() func3()';   // Номер 1
+    $reg = '#(func\d(?=\())#';
+    preg_match_all($reg, $str, $arr);
+    print_r($arr[1]);
+    echo '<br>';
+
+    $str = '<a href="" class="eee" id="zzz">';   // Номер 2
+    $reg = '#([a-z]+(?=\=))#';
+    preg_match_all($reg, $str, $arr);
+    print_r($arr[1]);
+    echo '<br>';
+
+    $str = '$aaa $bbb $ccc';;   // Номер 3
+    $reg = '#((?<=\$)[a-z]{3})#';
+    preg_match_all($reg, $str, $arr);
+    print_r($arr[1]);
+    echo '<br>';
+
+// Замена с коллбэком через регулярки
+    echo '<h3>Замена с коллбэком через регулярки</h3>'; 
+
+    $str = '12345';   // Номер 1
+    $res = preg_replace_callback('#(\d)#', function($match) {
+        return $match[1] ** 2;}, $str);
+
+    echo $res;
+
+// Игнорирование регистра регулярок
+    echo '<h3>Игнорирование регистра регулярок</h3>'; 
+
+    echo preg_replace('#[a-z]+#i', '!', 'aaa BBB');  // Номер 1
+    echo '<br>';
+
+// Комментарии в регулярке
+    echo '<h3>Комментарии в регулярке</h3>'; 
+
+    
+
+
+    
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
