@@ -573,7 +573,7 @@
 		}	
 	}
 	?>
-	<br><br>
+	<br>
 
 
 <!-- номер 4 -->
@@ -583,7 +583,6 @@
 		<input id="nmbr1" name="nmbr1">
 		<label for="nmbr2">Введите число 2</label>
 		<input id="nmbr2" name="nmbr2">
-
 		<input type="submit">
 	</form>
 	
@@ -610,25 +609,251 @@
 	?>
 	</div>
 
+	<br><br>
+
+<!-- номер 5 -->
+	Введите коэффициенты квадратного уравнения
+	<form method="GET">
+		<label for="A">A:</label>
+		<input name='a'id=A>
+		<label for="B">B:</label>
+		<input name='b'id=B>
+		<label for="C">C:</label>
+		<input name='c'id=C>
+		<input type="submit">
+	</form>
+
+	<?php
+	if (!empty($_GET) and isset($_GET['a'])) {
+		$a = $_GET['a'];
+		$b = $_GET['b'];
+		$c = $_GET['c'];
+		
+		$D = pow($b, 2) - 4 * $a * $c;
+		if ($D > 0) {
+			$x1 = (-$b + sqrt($D)) / (2 * $a);
+			$x2 = (-$b - sqrt($D)) / (2 * $a);
+			echo "Уравнение имеет два корня: $x1 и $x2";
+		} elseif ($D = 0) {
+			$x1 = -$b / (2 * $a);
+			echo "Уравнение имеет один корень: $x1";
+		} else {
+			echo "Уравнение не имеет действительных корней";
+		}
+	}
+	?>
+	<br><br>
+
+
+<!-- номер 6 -->
+<div style="border: 2px solid lightgray; padding: 10px; display: inline-block;">
+Тройка Пифагора
+	<form methon="GET">
+		<label for="A1">A:</label>
+		<input name='a1'id=A1>
+		<label for="B1">B:</label>
+		<input name='b1'id=B1>
+		<label for="C1">C:</label>
+		<input name='c1'id=C1>
+		<input type="submit">
+	</form>
+
+	<?php
+	if (!empty($_GET) and isset($_GET['a1'])) {
+		$a = $_GET['a1'];
+		$b = $_GET['b1'];
+		$c = $_GET['c1'];
+		
+		if (($a ** 2 == $b ** 2 + $c ** 2) or 
+			($b ** 2 == $a ** 2 + $c ** 2) or 
+			($c ** 2 == $b ** 2 + $a ** 2)) {
+			echo "Числа $a, $b, $c - это тройка Пифагора";
+		} else {
+			echo "Числа $a, $b, $c - это НЕ тройка Пифагора";
+		}
+	}
+	?>
+</div>
+<br><br>
+
+
+<!-- номер 7 -->
+Сколько дней до дня рождения
+
+	<form method ="GET">
+		<label for="birthday2">Введите дату рождения в формате 01.12.1990:</label>
+		<input name='birthday2'id=birthday2 value="<?=
+			$_GET["birthday2"] ?? '' ?>">
+		<input type="submit">
+	</form>
+
+	<?php
+	if (!empty($_GET) and isset($_GET['birthday2'])) {		
+		$birthday = str_replace('.', '-', $_GET['birthday2']);
+		$year = date('Y', time());
+		$birthday = strtotime(preg_replace('#\d{4}#', $year, $birthday));
+		if ($birthday > time()) {
+			$difference = floor(($birthday - time()) / 86400);
+			echo "До дня рождения осталось $difference дней";
+		} else {
+			$difference = floor((strtotime('+1year', $birthday) - time()) / 86400);
+		 	echo "До дня рождения осталось $difference дней";
+		}
+	}
+	?>
+</div>
+<br><br>
+
+
+<!-- номер 8 -->
+<div style="border: 2px solid lightgray; padding: 10px; display: inline-block;">
+Введите текст, в котором нужно посчитать количество символов и строк
+
+	<form method ="GET">
+			<textarea cols=50 rows=4 name='amount' ><?=$_GET['amount'] ?? ''; ?></textarea>
+			<br>
+			<input type="submit">
+		</form>
+
+		<?php
+		if (!empty($_GET) and isset($_GET['amount'])) {		
+			$characters = mb_strlen($_GET['amount']);
+			$words = preg_match_all("#\b[а-яё\w]+\b#u", $_GET['amount']);
+			echo "Количество символов в тексте: $characters<br>";
+			echo "Количество слов в тексте: $words";
+		}
+		?>
+	</div>
+	<br><br>
+
+
+<!-- номер 9 -->
+<div style="padding: 10px; display: inline-block;">
+Введите текст, в котором нужно посчитать количество символов и строк
+
+	<form method ="GET">
+			<textarea cols=50 rows=4 name='persent' ><?=$_GET['persent'] ?? ''; ?></textarea>
+			<br>
+			<input type="submit">
+		</form>
+
+		<?php
+		if (!empty($_GET) and isset($_GET['persent'])) {	
+			$arr=[];
+			$text = str_split($_GET['persent']);
+			foreach ($text as $elem) {
+				if (!isset($arr[$elem]) and $elem != ' ') {
+					$arr[$elem] = 1;
+				} elseif ($elem != ' ') {
+					$arr[$elem] += 1;
+				}
+			}
+			$amount = array_sum($arr);
+			foreach ($arr as $key => $elem) {
+				echo "$key - " . round(($elem/$amount) * 100) . '%, ';
+			}
+			}
+		?>
+	</div><br><br>
+
+
+<!-- номер 10 -->
+<div style="border: 2px solid lightgray; padding: 10px; display: inline-block;">
+День недели по дате
+
+
+	<form method="GET">
+		<label for="days">Введите день:</label>
+		<input name='days'id="days" value="<?= $_GET['days'] ?? ''; ?>">
+		<br>
+		<label for="months">Введите месяц:</label>
+		<input name="months" id="months" value="<?= $_GET["months"] ?? ''; ?>">
+		<br>
+		<label for="years" >Введите год:</label>
+		<input name='years' id="years" value="<?= $_GET["years"] ?? ''; ?>">
+		<input type="submit">
+	</form>
+
+	<?php 
+	if (!empty($_GET) and isset($_GET['days'])) {
+		$arr = [ 'воскресенье', 'понедельник', 'вторник', 'среда', 
+		'четверг', 'пятница', 'суббота'];
+		$year = $_GET['years'];
+		$month = $_GET['months'];
+		$day = $_GET['days'];
+		$date = strtotime($year. "-" . $month. "-" . $day);
+		echo "Этот день - " . $arr[date("w", $date)];
+	
+	}
+	?>
+
+</div><br><br>
+
+<!-- номер 11 -->
+Гороскоп
+
+	<form method ="GET">
+		<label for="birthday3">Введите дату рождения в формате 01-12-1990:</label>
+		<input name='birthday3'id=birthday3 value="<?=
+			$_GET["birthday3"] ?? '' ?>">
+		<input type="submit">
+	</form>
+
+	<?php 
+	if (!empty($_GET) and isset($_GET['birthday3'])) {
+		$current_year = date("Y", time()); 
+		$signs = ["Козерог" => ["22-12", "20-01", "Гороскоп на сегодня", 
+			"Гороскоп для Козерога на завтра", "Гороскоп на послезавтра"], 
+			"Водолей" => ["21-01", "20-02", "Гороскоп на сегодня", 
+			"Гороскоп для Водолея на завтра", "Гороскоп на послезавтра"],
+			"Рыбы" => ["21-02", "20-03", "Гороскоп на сегодня", 
+			"Гороскоп для рыбы на завтра", "Гороскоп на послезавтра"], 
+			"Овен" => ["21-03", "20-04", "Гороскоп на сегодня", 
+			"Гороскоп для Овна на завтра", "Гороскоп на послезавтра"], 
+			"Телец" => ["21-04", "20-05", "Гороскоп на сегодня", 
+			"Гороскоп для Тельца на завтра", "Гороскоп на послезавтра"],
+			"Близнецы" => ["21-04", "21-06", "Гороскоп на сегодня", 
+			"Гороскоп для Близнецов на завтра", "Гороскоп на послезавтра"], 
+			"Рак" => ["22-06", "22-07", "Гороскоп на сегодня", 
+			"Гороскоп для Рака на завтра", "Гороскоп на послезавтра"], 
+			"Лев" => ["23-07", "23-08", "Гороскоп на сегодня", 
+			"Гороскоп для Льва на завтра", "Гороскоп на послезавтра"],
+			"Дева" => ["24-08", "23-09", "Гороскоп на сегодня", 
+			"Гороскоп для Девы на завтра", "Гороскоп на послезавтра"], 
+			"Весы" => ["24-09", "22-10", "Гороскоп на сегодня", 
+			"Гороскоп для Весов на завтра", "Гороскоп на послезавтра"], 
+			"Скорпион" => ["24-10", "22-11", "Гороскоп на сегодня", 
+			"Гороскоп для Скорпиона на завтра", "Гороскоп на послезавтра"],
+			"Стрелец" => ["23-11", "21-12", "Гороскоп на сегодня", 
+			"Гороскоп для Стрельца на завтра", "Гороскоп на послезавтра"]
+		];
+	
+		$birthday = $_GET["birthday3"];
+		$birthday = preg_replace('#\d{4}#', $current_year, $birthday);
+		$birthday = strtotime($birthday);
+
+		foreach ($signs as $key => $elem) {
+			$start_year = ($key != "Козерог") ? $current_year: $current_year+1;
+			$start = strtotime($elem[0] . '-' . $current_year) . ' ';
+			$end = strtotime($elem[1] . '-' . $current_year) . ' ';
+			if ($birthday >= $start and $birthday < $end) {
+				$sign = $key;
+				break;
+			}
+		}
+
+		echo $sign . ':<br> ';
+		for ($i = 2; $i < count($signs[$sign]); $i++) {
+			echo $signs[$sign][$i] . '<br>';
+		}
+
+	}	
 	
 
-
-
-
-
-
-
-
-
-
-
-
+?>
 
 
 </div>
-
-
-
 
 
 
