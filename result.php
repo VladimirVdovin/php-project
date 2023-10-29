@@ -6,6 +6,12 @@
 	</head>
 	<body>
         <?php
+
+            if (isset($_GET["test1"]) and isset($_GET["test2"])) {
+                echo $_GET["test1"] . ' ' . $_GET["test2"];
+            }
+
+
             if (isset($_GET["number1"]) and isset($_GET["number2"])) {
                 echo ($_GET["number1"] + $_GET["number2"]);
             }
@@ -30,10 +36,10 @@
                 'четверг', 'пятница', 'суббота'];
                 echo "День недели, когда вы родились: "  . $weekday[date('w', $birthtime)];
             }
-            
-           
-
         ?>
+
+
+
 
 
 	</body>

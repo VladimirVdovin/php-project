@@ -6,6 +6,21 @@
 	</head>
 	<body>
 
+	<?php
+		include 'navbar.php';
+	?>
+
+<!-- Метод отправки формы в PHP -->
+	<div style="text-align: center;">
+	<h3>Метод отправки формы в PHP</h3>
+
+		<form action='result.php' method="GET">
+			<input name="test1">
+			<input name="test2">
+			<input type="submit">
+		</form>
+
+
 	
 <!-- Получение данных форм методом GET -->
 	<div style="background-color: Gainsboro; text-align: center;">
@@ -60,6 +75,22 @@
 			</div>
 		</form>
 	</div>
+
+
+<!-- Получение данных форм методом GET -->
+<div style="text-align: center;">
+	<h3>Сессии в PHP</h3>  
+        
+        
+        <?php
+        $_SESSION['number1'] = 2;
+        $_SESSION['number2'] = 3; 
+        session_write_close(); 
+        ?>
+
+<a href="test2.php">Результат сложения переменных из сессии тут: test2.php</a>
+<br><br>
+</div>
 
 
 <!-- Обработка формы в одном файле -->

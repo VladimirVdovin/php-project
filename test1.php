@@ -3,6 +3,45 @@
 ?>
 
 
+<!-- Куки, как и сессии, должны объявляться до первого вывода на странице,
+поэтому я перенес все setcookie в начало, а аналогичный текст в заданиях
+закомментировал -->
+
+<?php
+    if (!isset($_COOKIE['str']))
+	 setcookie('str1', 'Надпись появится сразу');
+
+    if (!isset($_COOKIE['start_moment']) && empty($_COOKIE['time_diff'])) {
+        $start_moment = time();
+        setcookie('start_moment', $start_moment);
+        setcookie('time_diff', $start_moment);
+    }
+
+    if (!isset($_COOKIE['cookie_for_1month'])) {
+        $month = 60 * 60 * 24 * 30;
+        setcookie('cookie_for_1month', 'Кука на месяц', time() + $month);
+        setcookie('cookie_for_1year', 'Кука на год', time() + ($month * 12));
+        setcookie('cookie_for_10years', 'Кука на 10 лет', time() + ($month * 12 * 10));
+    }
+
+    if (!isset($_COOKIE['cookie_for_delete'])) {
+        $cookie_for_delete = 'Кука еще есть, но после обновления 
+            страницы она будет удалена.<br> Однако после следующего нажатия F5
+            кука появиться вновь';
+        setcookie('cookie_for_delete', 'Кука еще есть', time() + 1000);
+    } else {
+        setcookie('cookie_for_delete', 'Кука еще есть', time());
+    }
+
+    if (!isset($_COOKIE['cookie_for_delete2']))
+        
+        $cookie_for_delete2 = 'Если этот текст не повторяется два раза,<br>
+            значит кука была моментально удалена и текст осталася только в переменной';
+        setcookie('cookie_for_delete2', $cookie_for_delete2, time() + 1000);
+        setcookie('cookie_for_delete2', $cookie_for_delete2, time());
+
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,11 +57,16 @@
 		    ?>
 
 
+    <?php
+		include 'navbar.php';
+    ?>
+
+
 <!-- Получение данных форм методом GET -->
 <div style="background-color: Gainsboro; text-align: center;">
 	<h3>Сессии в PHP</h3>  
-        
-        
+
+
         <?php
         $_SESSION['number1'] = 2;
         $_SESSION['number2'] = 3; 
@@ -32,6 +76,7 @@
 <a href="test2.php">Результат сложения переменных из сессии тут: test2.php</a>
 <br><br>
 </div>
+
 
 <!-- Возможные проблемы при работе с сессиями-->
 <div style="text-align: center;">
@@ -219,11 +264,117 @@
  
     
 
+ <!-- ----- Первая тринадцатая - Куки ------  -->
+
+
+<!-- Введение в работу с куками  -->
+<div style="text-align: center;">         
+	<h3>Введение в работу с куками</h3> 
+
+
+    <?php
+	    setcookie('test', 'Проверка. Куки работают');
+    ?>
+    <a href='test2.php'>Провери куки на test2</a>
+
+</div>
+
+<!-- Проблема установки кук  -->
+<div style="background-color: Gainsboro; text-align: center;">         
+	<h3>Проблема установки кук</h3> 
+
+    <?php
+        setcookie('str', "Надпись появиться только  
+            после перезагрузки страницы");
+        print_r($_COOKIE["str"]);
+    ?>
+
+</div>
+
+
+<!-- Мгновенная установка кук  -->
+<div style="text-align: center;">       
+
+
+	<h3>Мгновенная установка кук</h3> 
+
+    <?php
+        if (!isset($_COOKIE['str']))
+	        // setcookie('str1', 'Надпись появится сразу');
+            $_COOKIE['str1'] = 'Надпись появится сразу';
+    
+        print_r($_COOKIE['str1']);
+        unset($_COOKIE['str']);
+    ?>
+
+</div>
+
+
+<!-- Счетчик обновления страницы на куках  -->
+<div style="background-color: Gainsboro; text-align: center;">         
+	<h3>Счетчик обновления страницы на куках</h3> 
+
+    <?php
+        if (!isset($_COOKIE['start_moment']) && empty($_COOKIE['time_diff'])) {
+            // $start_moment = time();
+            // setcookie('start_moment', $start_moment);
+            // setcookie('time_diff', $start_moment);
+            
+        } else {
+            $current_moment = time();
+            $_COOKIE['time_diff'] = $current_moment - $_COOKIE['start_moment']; 
+            echo 'Прошло времени: ' . $_COOKIE['time_diff' ] . ' cек';
+        } 
+    ?>
+
+</div>
+
+
+<!-- Время жизни куки в PHP  -->
+<div style="text-align: center;">         
+	<h3>Время жизни куки в PHP</h3> 
+
+    <?php
+        echo $_COOKIE['cookie_for_1month'] . ", ";
+        echo $_COOKIE['cookie_for_1year'] . ", ";
+        echo $_COOKIE['cookie_for_10years'];
+    ?>
+
+</div>
+
+
+<!-- Удаление кук в PHP  -->
+<div style="background-color: Gainsboro; text-align: center;">         
+	<h3>Удаление кук в PHP</h3> 
+
+    <?php
+        if (!empty($cookie_for_delete)) {
+            echo $cookie_for_delete;
+        }
+    ?>
+
+    </div>
+
+
+<!-- УМгновенное удаление кук  -->
+<div style="text-align: center;">         
+	<h3>Мгновенное удаление кук</h3> 
+
+    <?php
+	echo $cookie_for_delete2 . "<br>";
+    if (isset($_COOKIE['cookie_for_delete2'])) {
+		unset($_COOKIE['cookie_for_delete2']);
+	}
+    if (!empty($_COOKIE['cookie_for_delete2'])) {
+		var_dump($_COOKIE['cookie_for_delete2']); 
+	}
+	
+    ?>
 
 
 
 
-
+</div>
 
 
 
