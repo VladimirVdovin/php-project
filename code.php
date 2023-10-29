@@ -3920,25 +3920,13 @@
 
 
 
-<!-- ------- Глава одинадцатая - Основы работы с формами -------- -->
 
 
 
-<!-- Основы работы с формами в PHP -->
-    <h3>Основы работы с формами в PHP</h3>
 
-<form>
-    <label for="name">Имя пользователя</label>
-    <input id='name', name='name'>
-    <br><br>
-    <label for="age">Возраст</label>
-    <input id='age', name='age'>
-    <br><br>
-    <label for="income">Доход</label>
-    <input id='income', name='income'>
-    <br><br>
-    <input type='submit'>
-</form>
+
+
+
 
 
 

@@ -10,6 +10,31 @@
 		include 'navbar.php';
 	?>
 
+
+<!-- ------- Глава одинадцатая - Основы работы с формами -------- -->
+
+
+<!-- Основы работы с формами в PHP -->
+	<div style="background-color: Gainsboro; text-align: center;">
+	<h3>Основы работы с формами в PHP</h3>
+
+<form>
+    <label for="name">Имя пользователя</label>
+    <input id='name', name='name'>
+    <br><br>
+    <label for="age">Возраст</label>
+    <input id='age', name='age'>
+    <br><br>
+    <label for="income">Доход</label>
+    <input id='income', name='income'>
+    <br><br>
+    <input type='submit'>
+</form>
+
+</div>
+
+
+
 <!-- Метод отправки формы в PHP -->
 	<div style="text-align: center;">
 	<h3>Метод отправки формы в PHP</h3>
@@ -75,22 +100,6 @@
 			</div>
 		</form>
 	</div>
-
-
-<!-- Получение данных форм методом GET -->
-<div style="text-align: center;">
-	<h3>Сессии в PHP</h3>  
-        
-        
-        <?php
-        $_SESSION['number1'] = 2;
-        $_SESSION['number2'] = 3; 
-        session_write_close(); 
-        ?>
-
-<a href="test2.php">Результат сложения переменных из сессии тут: test2.php</a>
-<br><br>
-</div>
 
 
 <!-- Обработка формы в одном файле -->
