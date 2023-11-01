@@ -1,7 +1,19 @@
-<?php
-    session_start();
-?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title >Sessions</title>
+        <link rel="stylesheet" href="public/style.css">
+    <head>
+    <body style="text-align: center;">
+        <header>
+			<?php include 'includes/header.php'; ?>
+            <?php session_start(); ?>
+        </header>
 
+        <aside>
+			<?php include 'includes/slidebar.php'; ?>
+		</aside>
 
 <!-- Куки, как и сессии, должны объявляться до первого вывода на странице,
 поэтому я перенес все setcookie в начало, а аналогичный текст в заданиях
@@ -41,26 +53,6 @@
         setcookie('cookie_for_delete2', $cookie_for_delete2, time());
 
 ?>
-
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title >
-        </title>
-    <head>
-    <body>
-        <?php
-			    error_reporting(E_ALL);
-			    ini_set('display_errors', 'on');
-			    mb_internal_encoding('UTF-8');
-		    ?>
-
-
-    <?php
-		include 'navbar.php';
-    ?>
-
 
 <!-- Получение данных форм методом GET -->
 <div style="background-color: Gainsboro; text-align: center;">
@@ -370,16 +362,15 @@
 	}
 	
     ?>
-
-
-
+</div>
 
 </div>
 
+        <footer>
+			<?php include 'includes/footer.php'; ?>
+		</footer>
 
-
-
-</div>
+        <br>
 
 
     </body>

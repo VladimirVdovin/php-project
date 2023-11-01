@@ -2,13 +2,17 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>result</title>
+		<title>forms</title>
+		<link rel="stylesheet" href="public/style.css">
 	</head>
-	<body>
+	<body style="text-align: center;">
+		<header>
+			<?php include 'includes/header.php'; ?> 
+        </header>
 
-	<?php
-		include 'navbar.php';
-	?>
+		<aside>
+			<?php include 'includes/slidebar.php'; ?>
+		</aside>
 
 
 <!-- ------- Глава одинадцатая - Основы работы с формами -------- -->
@@ -888,10 +892,11 @@
 		}
 
 	}	
-	
-
 ?>
 
+        <footer>
+			<?php include 'includes/footer.php'; ?>
+		</footer>
 
 </div>
 

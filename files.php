@@ -2,18 +2,17 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>php project</title>
+		<title>files</title>
+        <link rel="stylesheet" href="public/style.css">
 	</head>
-	<body>
+	<body style="text-align: center;">
+        <header>
+		    <?php include 'includes/header.php' ?>
+        </header> 
 
-		<?php
-			error_reporting(E_ALL);
-			ini_set('display_errors', 'on');
-			mb_internal_encoding('UTF-8');
-			
-			include 'navbar.php';
-
-		?>
+        <aside>
+			<?php include 'includes/slidebar.php'; ?>
+		</aside>
 
 
 <!-- ------- Глава 14 - Файловая система ---------->
@@ -24,8 +23,8 @@
     <h3>Чтение файлов в PHP</h3>
 
     <?php
-        $content1 = file_get_contents('1.txt');
-        $content2 = file_get_contents('2.txt');
+        $content1 = intval(file_get_contents('1.txt'));
+        $content2 = intval(file_get_contents('2.txt'));
 
 	    echo "Сумма чисел из файлов 1.txt и 2.txt равна " . 
         ($content1 + $content2);
@@ -54,7 +53,7 @@
     <h3>Комбинация операций чтения и записи файла</h3>
 
     <?php
-        $content = file_get_contents('1.txt');
+        $content = intval(file_get_contents('1.txt'));
         file_put_contents('1.txt', $content ** 2);
         echo "Число из файла 1.txt, возведенное в квадрат - " 
         . file_get_contents('1.txt');
@@ -342,46 +341,193 @@
     <div style="text-align: center;">
     <h3>Чтение содержимого папки</h3>
 
+    <?php                                 // Номер 1
+        echo "Содержимое папки dir:<br>";
+        $dir = scandir("dir");
+        $files = array_diff($dir, ['..', '.']);
+        foreach ($files as $elem) {
+            echo $elem . '<br>'; 
+        }
+    ?>
 
 
+    <?php                                 // Номер 2
+        echo "Содержимое текстовых файлов папки dir:<br>";
+        $dir = scandir("dir");
+        $files = array_diff($dir, ['..', '.']);
+        foreach ($files as $elem) {
+            if (file_exists('dir/' . $elem) && is_file('dir/' . $elem)) {
+                echo file_get_contents('dir/' . $elem) . "<br>";
+            }
+        }
+    ?>
+
+    <?php                                              // Номер 3
+        $dir = scandir("dir");
+        $files = array_diff($dir, ['..', '.']);
+        foreach ($files as $elem) {
+            if (file_exists('dir/' . $elem) && is_file('dir/' . $elem)) {
+                $content4 = file_get_contents('dir/' . $elem);
+                $content4 .= '!';
+                file_put_contents('dir/' . $elem, $content4);
+            }
+        }
+    ?>
+     </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-       
-
-
+<!-- Отличаем папку от файлаи -->
+    <div style="background-color: Gainsboro; text-align: center;">
+    <h3>Отличаем папку от файла</h3>
 
     
+    <?php                                   // Номер 1
+        if (is_dir("dir")) 
+            echo "dir - это папка";
+    ?>
     
+    <br>
+    
+    <?php                                   // Номер 2
+        if (is_file("index.php")) 
+            echo "index.php - это файл";
+    ?>
+
+    </div>
+
+
+<!-- Разбираем содержимое папки -->
+    <div style="background-color: Gainsboro; text-align: center;">
+    <h3>Разбираем содержимое папки</h3>
+
+    <   <?php                                         // Номер 1
+        echo "Список подпапок папки dir:<br>";
+        $dir = array_diff(scandir('dir'), ['..', '.']);
+        foreach ($dir as $subdir) {
+            if (is_dir('dir/' . $subdir)) {
+                echo $subdir . '<br>';
+            }
+        }
+    ?>
+
+
+    <?php                                         // Номер 2
+        echo "Список файлов в папке dir:<br>";
+        $dir = array_diff(scandir('dir'), ['..', '.']);
+        foreach ($dir as $file) {
+            if (is_file('dir/' . $file)) {
+                echo $file . '<br>';
+            }
+        }
+    ?>
+
+    <?php                                         // Номер 3
+        echo "Добавляем в конец каждого файла папки dir текущее время:<br>";
+        $dir = array_diff(scandir('dir'), ['..', '.']);
+        foreach ($dir as $file) {
+            $path = 'dir/' . $file;
+            if (is_file($path)) {
+                $content6 = file_get_contents($path);
+                $content6 .= date('H:i:s', time());
+                echo file_get_contents($path, $content6) . "<br>";
+            }
+        }
+    ?>
+    </div>
+
+
+<!-- Вставка файлов-->
+    <div style="text-align: center;">
+    <h3>Вставка файлов</h3>
+
+
+    <?php                                         // Номер 1
+        include('php_files_for_exec\file1.php');
+        echo '<br>';
+        include('php_files_for_exec\file2.php');
+        echo '<br>';
+        include('php_files_for_exec\file3.php');
+        echo '<br>';
+        include('php_files_for_exec\file4.php');
+    ?>
+    </div>
+
+
+<!-- Запись вставки в переменную -->
+    <div style="background-color: Gainsboro; text-align: center;">
+    <h3>Запись вставки в переменную</h3>
+
+        <?php 
+            
+            function getWeekday($name) {
+                ob_start();
+                    include($name);
+                return ob_get_clean();
+            }
+
+            $res_getWeekday = getWeekday("dir\weekdays\weekdays.php");
+            echo $res_getWeekday;
+        ?>
+
+    
+<!-- Подключение файлов -->
+    <div style="text-align: center;">
+    <h3>Подключение файлов</h3>
+
+    <?php 
+        require 'includes\functions.php';
+
+        echo "Подключенная функция calcMinusOne: " . calcMinusOne(10) . '<br>';
+        echo "Подключенная функция calcPlusFive: " . calcPlusFive(10) . '<br>';
+
+    ?>
+
+    Вставка из файла из предудущего задания 
+    <br>   
+    <?php echo $res_getWeekday; ?>
+
+
+<!-- Однократное подключение файлов -->
+<div style="background-color: Gainsboro; text-align: center;">
+    <h3>Однократное подключение файлов</h3>
+
+    <?php 
+    
+        require_once 'includes\new_functions.php';
+        print_r(calsMinusPlus([1,2,3,4,5]));
+
+    ?>
+
+<!-- Запись подключения в переменную -->
+    <div style="text-align: center;">
+    <h3>Запись подключения в переменную</h3>
+    
+    <?php 
+        $week = require_once "dir\weekdays\months.php";
+        print_r($week);
+    ?>        
+    
+    </div>
 
 
 
 
 
 
-   
 
+
+
+
+
+
+
+
+
+    <br><br>
+
+    <footer>
+		<?php include 'includes/footer.php'; ?>
+	</footer>
 
 
 
