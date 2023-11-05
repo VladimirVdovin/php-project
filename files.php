@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>files</title>
-        <link rel="stylesheet" href="public/style.css">
+        <link rel="stylesheet" href="public/css/style.css">
 	</head>
 	<body style="text-align: center;">
         <header>
@@ -113,7 +113,7 @@
     </div>
 
 
-<!-- АПереименовывание файлов в PHP -->
+<!-- Переименовывание файлов в PHP -->
     <div style="text-align: center;">
     <h3>Переименовывание файлов в PHP</h3>
 
@@ -213,13 +213,13 @@
         ?>
 
         <?php                                           // Номер 3
-            $size = round(filesize("picture.jpg") / (1024 * 1024), 2);
-            echo "Размер файла code.php: $size мегабайта<br>";
+            $size = round(filesize("public\img\picture.jpg") / (1024 * 1024), 2);
+            echo "Размер файла picture.jpg: $size мегабайта<br>";
         ?>
 
         <!-- <?php                                           // Номер 4
-            $size = round(filesize("film.mkv") / (1024 * 1024 *1024), 2);
-            echo "Размер файла code.php: $size гигабайта<br>";
+            // $size = round(filesize("film.mkv") / (1024 * 1024 *1024), 2);
+            // echo "Размер файла code.php: $size гигабайта<br>";
         ?> -->
 
     </div>

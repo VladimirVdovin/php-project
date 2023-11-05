@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>forms</title>
-		<link rel="stylesheet" href="public/style.css">
+		<link rel="stylesheet" href="public/css/style.css">
 	</head>
 	<body style="text-align: center;">
 		<header>

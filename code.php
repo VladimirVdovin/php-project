@@ -102,7 +102,7 @@
     echo 8 . '<br>';
     echo 9 . '<br>';
 
-    echo "<img src='images.png'>"  . '<br>';
+    echo "<img src='public\img\images.png'>"  . '<br>';
     echo '<br>';
     echo "<input value='Какой-нибудь текст'>" . '<br>';
     echo '<br>';
@@ -3655,9 +3655,9 @@
 // Генерация тегов с атрибутами
     echo '<h3>Генерация тегов с атрибутами</h3>';
 
-    $src1 = '1.png';    // Номер 1
-	$src2 = '2.png';
-	$src3 = '3.png';
+    $src1 = 'public\img\1.png';    // Номер 1
+	$src2 = 'public\img\2.png';
+	$src3 = 'public\img\3.png';
 
     echo "<img src=\"$src1\">";
     echo "<img src=\"$src2\">";
@@ -3919,6 +3919,14 @@
 
 <br>
 
+
+
+
+
+
+
+
+    
 
 
 
