@@ -78,9 +78,9 @@
     <?php getDefaultTable($link); ?> 
 
 
-    <!-- функция рисует таблицу и заполняет данными из users -->
-    <!-- если $query не указан, то берет все данные из таблицы -->
-    <!-- если $query указан, то использует запрос из $query -->
+    <!-- функция рисует таблицу и заполняет данными -->
+    <!-- если $query не указан, то берет все данные из таблицы users -->
+    <!-- если $query указан, то заполняет согласно запросу из $query -->
     <?php           
     function showTableUsers($link, $query = null) {
         if ($query == null) {
@@ -88,9 +88,18 @@
         } else {
             $query = mysqli_query($link, $query);
         }
+        if ($query === false) {
+            die(mysqli_error($link));
+        }
         for ($data=[]; $row=mysqli_fetch_assoc($query); $data[]=$row); 
         ?>
         <table border="2" style="width: 50%; margin: 0 auto;">
+        <?php $keys = array_keys($data[0]) ?>     
+            <tr>
+                <?php  foreach ($keys as $elem): ?> 
+                    <th><?php echo $elem ?></th>
+                <?php endforeach ?>
+            </tr>
             <?php foreach ($data as $line): ?>
             <tr>
                 <?php foreach ($line as $elem): ?> 
@@ -105,8 +114,7 @@
     
     <?php showTableUsers($link); ?>
 
-
-
+    </div>
 
 
 <!-- Отправка запросов к базе данных -->
@@ -556,7 +564,7 @@
         echo "<b>Средняя зарплата юзеров в 23 года</b>: " . 
         $count['avg'] . "<br>";    
     ?> 
-    <br>
+    
     <?php                                           // номер 2
         $query = mysqli_query($link, 
                             'SELECT ROUND(AVG(age))
@@ -564,17 +572,477 @@
                             FROM users 
                             WHERE salary>=500');
         $count = mysqli_fetch_assoc($query);
-        echo "<b>Средний возраст юзеров с salary от 500</b>: " . 
+        echo "<b>Средний возраст юзеров с salary от 500</b>: " .
         $count['avg'] . "<br>";    
-    ?> 
+    ?>
+    
+    <?php                                           // номер 3
+        $query = mysqli_query($link, 
+                            'SELECT name
+                            FROM users 
+                            WHERE age IN (23, 28, 30)
+                            AND salary IN (400, 900)');
+        $res = mysqli_fetch_assoc($query);
+        echo "<b>Список юзеров, у которыз salary IN (400, 900) 
+                и age IN (23, 28, 30)</b>: " . 
+        $res['name'] . "<br>";     
+    ?>
+ 
+    <?php                                           // номер 4
+        $query = mysqli_query($link, 
+                            'SELECT MIN(salary)
+                            AS min
+                            FROM users');
+        $res = mysqli_fetch_assoc($query);
+        echo "<b>Минимальная зарплата</b>: " . 
+        $res["min"] . "<br>";     
+    ?>
 
+    <?php                                           // номер 5
+        $query = mysqli_query($link, 
+                            'SELECT MAX(salary)
+                            AS max
+                            FROM users');
+        $res = mysqli_fetch_assoc($query);
+        echo "<b>Минимальная зарплата</b>: " . 
+        $res["max"] . "<br>";     
+    ?>
+
+    <?php                                           // номер 6
+        $query = mysqli_query($link, 
+                           "SELECT CONCAT('!!!', name, '!!!')
+                            AS min
+                            FROM users");
+        $res = mysqli_fetch_assoc($query);
+        echo "<b>Юзер с восклицательными знаками</b>: " . 
+        $res["min"] . "<br>";     
+    ?>
+
+    </div>
+
+
+
+             <!-- ----- Первая 16 - Организация БД ------  -->
+
+
+ <!-- Связывание таблиц в базах данных -->
+ <div>
+    <h3>Связывание таблиц в базах данных</h3>
+
+    
+                                                    <!-- номер 1 -->
+    <div style="display: flex; justify-content: center;"> 
+        
+        <div style="width: 30%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>Товары:</b>
+            <ul>
+                <li>id (PRIMARY KEY)</li>
+                <li>название товара</li>
+                <li>цена</li>
+                <li>количество</li>
+                <li>category_id (FOREIGN KEY (category_id))</li>
+            </ul>
+        </div>
+
+        <div style="width: 30%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>Категории товаров:</b>
+            <ul>
+                <li>category_id (PRIMARY KEY)</li>
+                <li>категория</li>
+            </ul>
+        </div>
+    </div>
+
+    <br>
+                                                      <!-- номер 2 -->
+    <div style="display: flex; justify-content: center;"> 
+        <div style="width: 30%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>Реки:</b>
+            <ul>
+                <li>id (PRIMARY KEY)</li>
+                <li>Название реки</li>
+                <li>Длина реки</li>
+                <li>Глебина реки</li>
+                <li>sea_id (FOREIGN KEY (sea_id))</li>
+            </ul>
+        </div>
+
+        <div style="width: 30%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>Моря:</b>
+            <ul>
+                <li>sea_id (PRIMARY KEY)</li>
+                <li>Название моря</li>
+                <li>Глубина моря моря</li>
+                <li>Площадь</li>
+            </ul>
+        </div>
+    </div>
+
+
+    <br>
+                                                      <!-- номер 3 -->
+    <div style="display: flex; justify-content: center;"> 
+        <div style="width: 30%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>Города:</b>
+            <ul>
+                <li>id (PRIMARY KEY)</li>
+                <li>Название города</li>
+                <li>Население</li>
+                <li>Координаты</li>
+                <li>country_id (FOREIGN KEY (country_id))</li>
+            </ul>
+        </div>
+
+        <div style="width: 30%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>Страны:</b>
+            <ul>
+                <li>country_id (PRIMARY KEY)</li>
+                <li>Названеи страны</li>
+                <li>Население</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Получении данных из связанных таблиц -->
+<div style="background-color: Gainsboro; text-align: center;">
+    <h3>Получении данных из связанных таблиц</h3>
+
+    <?php
+        echo "<b>Таблица product</b>";
+        showTableUsers($link, "SELECT * FROM product");
+        echo "<br>";
+        echo '<b>Таблица subcategory</b>';
+        showTableUsers($link, "SELECT * FROM subcategory");
+        echo "<br>";
+    ?>
+
+    <?php
+        echo '<b>Сводная таблица: товары-категории</b>';
+        $query = "SELECT product.name, subcategory.subcategory 
+                FROM product
+                LEFT JOIN subcategory 
+                ON product.id_subcategory=subcategory.id";
+       
+        showTableUsers($link, $query);
+    ?>
+</div>
+
+
+
+<!-- ПЦепочка связанных таблиц -->
+    <div style="text-align: center;">
+    <h3>Цепочка связанных таблиц</h3>
+
+
+                        <!-- номер 1. Распишите структуру хранения -->
+    <div style="display: flex; justify-content: center;"> 
+        <div style="width: 25%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>Product:</b>
+            <ul>
+                <li>id_product (PRIMARY KEY)</li>
+                <li>name</li>
+                <li>price</li>
+                <li>quanity</li>
+                <li>id_subcatagory (<b>FOREIGN KEY -> Subcategory.id</b>)</li>
+            </ul>
+        </div>
+
+        <div style="width: 25%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>Subcategory:</b>
+            <ul>
+                <li>id (PRIMARY KEY)</li>
+                <li>subcategoty</li>
+                <li>id_catagory (<b>FOREIGN KEY -> Category.id</b>)</li>
+            </ul>
+        </div>
+
+        <div style="width: 25%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>Category:</b>
+            <ul>
+                <li>category_id (PRIMARY KEY)</li>
+                <li>category</li>
+            </ul>
+        </div>
+    </div>
+    <br>
+
+ 
+                        <!-- номер 2. Запрос для 3-х связанных таблиц-->
+    <?php
+        echo '<b>Сводная таблица: товары-субкатегории-категории</b>';
+        $query = "SELECT product.name, subcategory.subcategory, category.category 
+                FROM product
+                LEFT JOIN subcategory 
+                ON product.id_subcategory=subcategory.id
+                LEFT JOIN category 
+                ON subcategory.id_category =category.id";
+            
+        showTableUsers($link, $query);
+    ?>
+    <br>
+
+                            <!-- номер 3. Запрос для 2-х связанных таблиц-->
+    <?php
+        echo '<b>Сводная таблица: субкатегории-категории</b>';
+        $query = "SELECT subcategory.subcategory, category.category 
+                FROM subcategory
+                LEFT JOIN category 
+                ON subcategory.id_category =category.id";
+            
+        showTableUsers($link, $query);
+    ?>
+
+
+<!-- Связывание через таблицу связи -->
+    <div style="background-color: Gainsboro; text-align: center;">
+    <h3>Связывание через таблицу связи</h3>
+
+    
+                        <!-- номер 1. Распишите структуру хранения -->
+    <div style="display: flex; justify-content: center;"> 
+        <div style="width: 25%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>Product:</b>
+            <ul>
+                <li>id_product (PRIMARY KEY)</li>
+                <li>name</li>
+                <li>price</li>
+                <li>quanity</li>
+                <li>id_subcatagory (FOREIGN KEY)</li>
+            </ul>
+        </div>
+
+        <div style="width: 25%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>Таблица связи product_subcategory:</b>
+            <ul>
+                <li>id (PRIMARY KEY)</li>
+                <li>id_product (<b>FOREIGN KEY -> Product.id_product</b>)</li>
+                <li>id_subcategory (<b>FOREIGN KEY -> Subcategory.id)</b></li>
+            </ul>
+        </div>
+
+        <div style="width: 25%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>Subcategory:</b>
+            <ul>
+                <li>id (PRIMARY KEY)</li>
+                <li>subcategoty</li>
+                <li>id_catagory (FOREIGN KEY)</li>
+            </ul>
+        </div>
+
+ 
+    </div>
+    <br>
+
+                        <!-- номер 2. Запрос через таблицу связи -->
+    <?php
+        echo '<b>Сводная таблица: товары и несколько категорий<br></b>';
+        $query = "SELECT product.name, subcategory.subcategory
+                FROM product
+                LEFT JOIN product_subcategory
+                ON product.id_product=product_subcategory.id_product
+                LEFT JOIN subcategory 
+                ON product_subcategory.id_subcategory =subcategory.id";
+            
+        
+        $res = mysqli_query($link, $query);
+        for ($data=[]; $row=mysqli_fetch_assoc($res); $data[]=$row);
+        // print_r($data);
+        $arr = []; 
+        foreach ($data as $elem) {
+            $arr[$elem['name']][] = $elem["subcategory"];
+        }
+    ?>
+
+                    <!-- номер 3. Список нескольких категорий для одного продукта -->
+    <div style="display: flex; justify-content: center; width: 100%;">
+    <ul style="float: left">
+    <?php foreach ($arr as $name => $subcategory): ?>
+        <li>
+            <?php echo "$name: "?> 
+            <?php foreach ($subcategory as $elem): ?> 
+                <?php echo "$elem" ?> 
+                <?php if (array_search($elem, $subcategory) != count($subcategory) - 1) {
+                    echo ", "; 
+                } ?>
+            <?php endforeach ?>    
+        </li>   
+    <?php endforeach ?>  
+    </ul>
+    </div>
+</div>
+      
+        
+<!-- Родственные связи данных -->
+    <div style="text-align: center;">
+    <h3>Родственные связи данных</h3>    
+
+                        <!-- номер 1. Распишите структуру хранения -->
+    <div style="display: flex; justify-content: center;"> 
+        <div style="width: 25%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>family:</b>
+            <ul>
+                <li>id (PRIMARY KEY)</li>
+                <li>user</li>
+                <li>father (связь -> id)</li>
+                <li>grandfather (связь -> id)</li>
+                <li>great_grandfather (связть -> id)</li>
+            </ul>
+        </div>
+    </div>
+
+    <br>
+
+    <b>Исходная таблица</b><br>
+    <?php
+        $query="SELECT * FROM family";
+        showTableUsers($link, $query);
+    ?>
+    
+    <br>
+                            <!-- Номер 2. Категория с родительской категорией -->
+    <b>Категория с родительской категорией</b><br>  
+    <?php              
+        $query="SELECT family.user, fathers.user AS fathers
+                FROM family
+                LEFT JOIN family AS fathers
+                ON fathers.id=family.parents" ;
+        showTableUsers($link, $query);
+    ?>
+
+    <br>
+                            <!-- Номер 3. Категория с родителем и прародителем -->
+    <b>Категория с родителем и прародителем</b><br>  
+    <?php            
+          
+        $query="SELECT family.user, fathers.user AS fathers,
+                        grandfathers.user AS grandfathers
+                FROM family
+                LEFT JOIN family AS fathers
+                ON fathers.id=family.parents
+                LEFT JOIN family AS grandfathers
+                ON grandfathers.id=family.grandfather";
+        showTableUsers($link, $query);
+    ?>
+
+    <br>
+                            <!-- Номер 4. Категория с родителем и прародителем -->
+    <b>Категория с родителем, прародителем и прапрародителем</b><br>  
+    <?php            
+          
+        $query="SELECT family.user, fathers.user AS fathers,
+                        grandfathers.user AS grandfathers,
+                        great_grandfathers.user AS great_grandfathers
+                FROM family
+                LEFT JOIN family AS fathers
+                ON fathers.id=family.parents
+                LEFT JOIN family AS grandfathers
+                ON grandfathers.id=family.grandfather
+                LEFT JOIN family AS great_grandfathers
+                ON great_grandfathers.id=family.great_grandfather";
+        showTableUsers($link, $query);
+    ?>
+
+
+
+<!-- Несколько потомков в родственных связях -->
+    <div style="text-align: center;">
+    <h3>Несколько потомков в родственных связях</h3>
+
+
+                                <!-- номер 1. Распишите структуру хранения -->
+    <div style="display: flex; justify-content: center;"> 
+        <div style="width: 25%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>family:</b>
+            <ul>
+                <li>id (PRIMARY KEY)</li>
+                <li>user</li>
+                <li>parents (father) (связь -> id)
+                    несколько значнений = id </li>
+            </ul>
+        </div>
+    </div>
+
+   <br>
+    
+                                        <!-- Номер 2. Юзер с отцом и матерью -->
+    <b>Таюлица user - parents</b><br>  
+    <?php            
+          
+        // добавим второго родителя для user2, user3, user4
+        $query = "INSERT INTO family (user, parents) VALUES 
+                    ('user5', 2),
+                    ('user6', 3),
+                    ('user7', 4)";
+        mysqli_query($link, $query);
+
+        $query="SELECT family.user, parents.user AS parent
+                FROM family
+                LEFT JOIN family AS parents
+                ON parents.id=family.parents";
+
+        // выводим таблицу с новыми записями
+    showTableUsers($link, "SELECT id, user, parents FROM family"); 
+
+    $res = mysqli_query($link, $query) or die(mysqli_error($link));
+    for ($data=[]; $row = mysqli_fetch_assoc($res); $data[] = $row);
+
+    echo "<br>";
+
+    $arr = [];
+    foreach ($data as $elem) {
+        if (!empty($elem['parent'])) {
+            $arr[$elem['parent']][] = $elem['user'];
+        }
+    }
+
+        // удалим добавленные ранее записи
+    mysqli_query($link, "DELETE FROM family WHERE 
+                            (user='user5') OR
+                            (user='user6') OR
+                            (user='user7')");
+    ?>
+
+
+        <!-- выводим список "потомок-родители" на экран -->
+    <div style="display: flex; justify-content: center; width: 100%;">
+    <ul style="float: left">
+    <?php foreach ($arr as $user => $parent): ?>
+        <li>
+            <?php echo "Родители $user: "?> 
+            <?php foreach ($parent as $elem): ?> 
+                <?php echo "$elem" ?> 
+                <?php if (array_search($elem, $parent) < count($subcategory)) {
+                    echo ", "; 
+                } ?>
+            <?php endforeach ?>    
+        </li>   
+    <?php endforeach ?>  
+    </ul>
     </div>
 
 
 
 
 
-             <!-- ----- Первая 16 - Организация БД ------  -->
+
+
 
 
 

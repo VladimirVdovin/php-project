@@ -1,10 +1,12 @@
 <?php
+    echo "<br>";
 
 
 /* ----- Первая глава - Основы ------ */
 
 
 // Переменные 	
+    echo "<div style=\"background-color: Gainsboro;\">";
     echo '<h3>Переменные</h3>'; 
 	$num = 123;
 	echo $num . '<br>';
@@ -13,6 +15,7 @@
     echo $a . '<br>';
     $a = 20;
     echo $a . '<br>';
+    echo "</div>";
 
 
 // Математические операции
@@ -46,6 +49,7 @@
 
 
 // Дроби и отрицательные числа
+    echo "<div style=\"background-color: Gainsboro;\">";
     echo '<h3>Дроби и отрицательные числа</h3>'; 
 
     $a = 1.5;
@@ -57,6 +61,7 @@
 
     $a = 200;
     echo -$a . '<br>';
+    echo "</div>";
 
 
 // Остаток от деления и возведение в степень 
@@ -70,6 +75,7 @@
 
 
 // Строки, сложение строк, strlen, mb_strlen
+    echo "<div style=\"background-color: Gainsboro;\">";
     echo '<h3>Строки, сложение строк, strlen, mb_strlen</h3>'; 
     $str = 'hello';
     echo $str . '<br>';
@@ -87,6 +93,7 @@
 
     $str = 'Привет мир';
     echo mb_strlen($str)  . '<br>';
+    echo "</div>";
 
 
 // HTML теги
@@ -110,6 +117,7 @@
 
     
 // Логические значения, null
+    echo "<div style=\"background-color: Gainsboro;\">";
     echo '<h3>Логические значения, null</h3>';
     $isTrue = true;
     echo $isTrue  . '<br>';
@@ -117,8 +125,9 @@
     echo $isFalse  . '<br>';
 
     $test = null;
-    var_dump($test)  . '<br>';
+    print_r($test)  . '<br>';
     var_dump($unknown)  . '<br>';
+    echo "</div>";
 
 
 // Логические значения, null
