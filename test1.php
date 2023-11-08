@@ -12,6 +12,7 @@
         </header>
 
         <aside>
+            <?php $CurrentPage = 'sessions.php'; ?>
 			<?php include 'includes/slidebar.php'; ?>
 		</aside>
 

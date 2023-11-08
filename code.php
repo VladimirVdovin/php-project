@@ -125,7 +125,7 @@
     echo $isFalse  . '<br>';
 
     $test = null;
-    print_r($test)  . '<br>';
+    var_dump($test)  . '<br>';
     var_dump($unknown)  . '<br>';
     echo "</div>";
 

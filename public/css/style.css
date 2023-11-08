@@ -7,11 +7,17 @@
 	position: fixed;
     list-style: none;
     color: white;
-	left: -150px;
+	left: -275px;
 	transition: 0.4s ease;
+	text-decoration: none;
+	
 }
 
 .menu:hover{
 	left: 0;
 	transition: 0.5s ease;
+}
+
+nav ul li a {
+	text-decoration: none;
 }

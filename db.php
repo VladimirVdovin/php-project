@@ -11,6 +11,7 @@
         </header> 
 
         <aside>
+            <?php $CurrentPage = 'bd.php'; ?>
 			<?php include 'includes/slidebar.php'; ?>
 		</aside>
 
@@ -253,7 +254,7 @@
 
 
 <!-- Логические операции в SQL -->
-    <div style="text-align: center;">
+    <div id="1" style="text-align: center;">
     <h3>Логические операции в SQL</h3>
 
 <?php 
@@ -961,7 +962,7 @@
 
 
 <!-- Несколько потомков в родственных связях -->
-    <div style="text-align: center;">
+    <div style="background-color: Gainsboro; text-align: center;">
     <h3>Несколько потомков в родственных связях</h3>
 
 
@@ -1036,6 +1037,251 @@
     <?php endforeach ?>  
     </ul>
     </div>
+</div>
+
+
+<!-- Практика на организацию баз данных-->
+    <div style="text-align: center;">
+    <h3>Практика на организацию баз данных</h3>
+
+    
+                        <!-- номер 1. Распишите структуру хранения: моря, реки и их притоки -->
+    Cтруктура хранения: моря, реки и их притоки
+    <div style="display: flex; justify-content: center;"> 
+        <div style="width: 25%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>Реки:</b>
+            <ul>
+                <li>id_river (PRIMARY KEY)</li>
+                <li>river_name</li>
+                <li>id_приток (связь с id_river)</li>
+                <li>id_sea (FOREIGN KEY -> sea_id)</li>
+            </ul>
+        </div>
+
+        <div style="width: 25%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>Моря:</b>
+            <ul>
+                <li>id (PRIMARY KEY)</li>
+                <li>sea_name</li>
+            </ul>
+        </div> 
+    </div>
+
+
+                            <!-- номер 2. Распишите структуру хранения: пользователь, обмен сообщениями -->
+    Структура хранения: пользователь, обмен сообщениями
+    <div style="display: flex; justify-content: center;"> 
+        <div style="width: 35%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>User:</b>
+            <ul>
+                CREATE TABLE user 
+                <li>id INT AUTO_INCREMENT PRIMARY KEY, </li>
+                <li>username VARCHAR(32) NOT NULL,</li>
+                <li>email VARCHAR(100) NOT NULL</li>
+            </ul>
+        </div>
+
+        <div style="width: 35%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>Message:</b>
+            <ul>
+                CREATE TABLE message
+                <li>id INT AUTO_INCREMENT PRIMARY KEY,</li>
+                <li>message NEXT NOT NULL,</li>
+                <li>sender_id INT NOT NULL,</li>
+                <li>recipient_id INT NOT NULL,</li>
+                <li>FOREIGN KEY (sender_id) REFERENCES users (id),</li>
+                <li>FOREIGN KEY (recipient_id) REFERENCES users (id),</li>
+            </ul>
+        </div> 
+    </div>
+
+
+                                <!-- номер 3. Футбольный сайт: даты игра, команды с игроками -->
+    Футбольный сайт: даты игра, команды с игроками
+    <div style="display: flex; justify-content: center;"> 
+        <div style="width: 30%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>Game:</b>
+            <ul>
+                CREATE TABLE game
+                <li><b>id</b> INT AUTO_INCREMENT PRIMARY KEY, </li>
+                <li><b>game_title</b> VARCHAR(32) NOT NULL,</li>
+                <li><b>date</b> TIMESTAMP DEFAULT CURRENT_TIMESTAMP,</li>
+                <li><b>team1_id</b> INT NOT NULL</li>
+                <li><b>team2_id</b> INT NOT NULL</li>
+                <li>FOREIGN KEY (team1_id) REFERENCES team1 (id),</li>
+                <li>FOREIGN KEY (team2_id) REFERENCES team2 (id)</li>
+            </ul>
+        </div>
+
+        <div style="width: 30%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>Team1:</b>
+            <ul>
+                CREATE TABLE team1
+                <li>id INT AUTO_INCREMENT PRIMARY KEY,</li>
+                <li><b>player1</b> VARCHAR(32) NOT NULL,</li>
+                <li><b>player2</b> VARCHAR(32) NOT NULL,</li>
+                <li><b>player3</b> VARCHAR(32) NOT NULL</li>
+            </ul>
+        </div> 
+
+        <div style="width: 30%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>Team2:</b>
+            <ul>
+                CREATE TABLE team2
+                <li><b>id</b> INT AUTO_INCREMENT PRIMARY KEY,</li>
+                <li><b>player1</b> VARCHAR(32) NOT NULL,</li>
+                <li><b>player2</b> VARCHAR(32) NOT NULL,</li>
+                <li><b>player3</b> VARCHAR(32) NOT NULL</li>
+            </ul>
+        </div> 
+    </div>
+
+
+    Cтруктура хранения Форум: категории, темы, посты, авторы, сообщения
+    <div style="display: flex; justify-content: center;"> 
+        <div style="width: 15%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>category:</b>
+            <ul>
+                <li>id_сategory (PrKey)</li>
+                <li>category</li>
+            </ul>
+        </div>
+
+        <div style="width: 15%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>topic:</b>
+            <ul>
+                <li>id_topic (PrKey)</li>
+                <li><b>cat_id <br> (category.id_сategory)</b></li>
+                <li>topic</li>
+                
+            </ul>
+        </div> 
+
+        <div style="width: 15%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>posts:</b>
+            <ul>
+                <li>id_post (PrKey)</li>
+                <li><b>topik_id <br> (topic.d_topic)</b></li>
+                <li>text</li>
+                <li<b>autor_id <br> (user.id_user)</b></li>
+            </ul>
+        </div> 
+
+        <div style="width: 15%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>user:</b>
+            <ul>
+                <li>id_user (PrKey)</li>
+                <li>name</li>
+                <li>email</li>
+            </ul>
+        </div> 
+
+        <div style="width: 20%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>messages:</b>
+            <ul>
+                <li>id_Message (PrKey)</li>
+                <li>text</li>
+                <li><b>sender_id <br> (user.id_user)</b></li>
+                <li><b>recipient_id <br> (user.id_user)</b></li>
+            </ul>
+        </div> 
+    </div>
+
+
+    Cтруктура хранения Соцсеть: юзер, друзья, стена, комментарии, сообщения
+    <div style="display: flex; justify-content: center;"> 
+        <div style="width: 15%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>users:</b>
+            <ul>
+                <li>id (PrKey)</li>
+                <li>name</li>
+            </ul>
+        </div>
+
+        <div style="width: 15%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>friends:</b>
+            <ul>
+                <li>id (PrKey)</li>
+                <li><b>friend_id <br> (users.id)</b></li>
+    
+                
+            </ul>
+        </div> 
+
+        <div style="width: 15%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>posts:</b>
+            <ul>
+                <li>id (PrKey)</li>
+                <li>text</li>
+                <li><b>autor_id <br> (users.id)</b></li>
+            </ul>
+        </div> 
+
+        <div style="width: 15%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>comments:</b>
+            <ul>
+                <li>id (PrKey)</li>
+                <li>text</li>
+                <li><b>post_id</b> (posts.id)</li>
+                <li><b>autor_id <br> (users.id)</b></li>
+            </ul>
+        </div> 
+
+        <div style="width: 20%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>Messages:</b>
+            <ul>
+                <li>id_Message (PrKey)</li>
+                <li>text</li>
+                <li><b>sender_id <br> (user.id)</b></li>
+                <li><b>recipient_id <br> (user.id_)</b></li>
+            </ul>
+        </div> 
+    </div>    
+
+
+    Cтруктура хранения Генеологическое дерево: Пользователь, его бабушки, дедушки, мама, папа и т.д.
+    <div style="display: flex; justify-content: center;"> 
+        <div style="width: 15%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>family_members:</b>
+            <ul>
+                <li>id (PrKey)</li>
+                <li>name</li>
+            </ul>
+        </div>
+
+        <div style="width: 15%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+            <b>relationship:</b>
+            <ul>
+                <li>id (PrKey)</li>
+                <li><b>name_id <br> (family_members_id)</b></li>
+                <li><b>relationship_id <br> (family_members_id)</b></li>
+                <li>relationship_type</li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+
 
 
 

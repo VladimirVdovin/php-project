@@ -11,6 +11,7 @@
         </header>
 
 		<aside>
+			<?php $CurrentPage = 'form.php'; ?>
 			<?php include 'includes/slidebar.php'; ?>
 		</aside>
 
