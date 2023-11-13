@@ -1,3 +1,16 @@
+<?php
+    require_once __DIR__ . "/vendor/autoload.php"; 
+    use Dotenv\Dotenv;
+
+    $dotenve = Dotenv::createImmutable(__DIR__);
+    $dotenve->load();
+
+    $host = $_ENV["DB_HOST"];
+    $user = $_ENV["DB_USER"];    
+    $pass = $_ENV["DB_PASS"];         
+    $name = $_ENV["DB_NAME"];   
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -26,14 +39,10 @@
 
 <!-- Подготовительные манипуляции для работы с SQL -->
     <div style="background-color: Gainsboro; text-align: center;">
-    <h3>Подготовительные манипуляции для работы с SQL</h3>
+    <h3 id="1">Подготовительные манипуляции для работы с SQL</h3>
 
-    <?php
 
-        $host = 'localhost'; 
-        $user = 'root';     
-        $pass = '';          
-        $name = 'mydb';      
+    <?php 
 
         $link = mysqli_connect($host, $user, $pass, $name);
         mysqli_query($link, "SET NAMES 'utf8'");
@@ -194,7 +203,7 @@
 
 <!-- Выборка записей при SQL запросе к базе -->
 <div style="background-color: Gainsboro; text-align: center;">
-    <h3>Выборка записей при SQL запросе к базе</h3>
+    <h3 id=2>Выборка записей при SQL запросе к базе</h3>
 
     <?php
         $query = "SELECT * FROM users WHERE id=3"; // номер 1
@@ -254,8 +263,8 @@
 
 
 <!-- Логические операции в SQL -->
-    <div id="1" style="text-align: center;">
-    <h3>Логические операции в SQL</h3>
+    <div style="text-align: center;">
+    <h3 id=3>Логические операции в SQL</h3>
 
 <?php 
     function getQueryResult($query, $link) {
@@ -328,7 +337,7 @@
 
 <!-- Поля выборки при SQL запросе -->
     <div style="background-color: Gainsboro; text-align: center;">
-    <h3>Поля выборки при SQL запросе</h3>
+    <h3 id=4>Поля выборки при SQL запросе</h3>
 
     <?php
         $query = "SELECT name, age, salary FROM users";   // Номер 1
@@ -417,7 +426,7 @@
 
 <!-- Удаление записей через SQL запрос -->
     <div style="background-color: Gainsboro; text-align: center;">
-    <h3>Удаление записей через SQL запрос</h3>
+    <h3 id=5>Удаление записей через SQL запрос</h3>
 
     <?php                                             // номер 1
         echo "Удаление всех записей с нечетными id:<br> ";
@@ -461,7 +470,7 @@
 
 <!-- Обновление записей через SQL запрос -->
     <div style="text-align: center;">
-    <h3>Обновление записей через SQL запрос</h3>
+    <h3 id=6>Обновление записей через SQL запрос</h3>
 
     <?php                                              // номер 1
         echo "<b>Все юзеры по возрастанию зарплаты:<br></b> ";
@@ -497,7 +506,7 @@
 
 <!-- Ограничение количества записей в SQL -->
     <div style="background-color: Gainsboro; text-align: center;">
-    <h3>Ограничение количества записей в SQL</h3>
+    <h3 id=7>Ограничение количества записей в SQL</h3>
 
     <?php                                              // номер 1
         echo "<b>Первые 4 юзера:<br></b> ";
@@ -527,7 +536,7 @@
 
 <!-- Подсчет количества через SQL запрос -->
     <div style="text-align: center;">
-    <h3>Подсчет количества через SQL запрос</h3>
+    <h3 id=8>Подсчет количества через SQL запрос</h3>
 
     
     <?php                                           // номер 1
@@ -628,7 +637,7 @@
 
  <!-- Связывание таблиц в базах данных -->
  <div>
-    <h3>Связывание таблиц в базах данных</h3>
+    <h3 id=9>Связывание таблиц в базах данных</h3>
 
     
                                                     <!-- номер 1 -->
@@ -739,9 +748,9 @@
 
 
 
-<!-- ПЦепочка связанных таблиц -->
+<!-- Цепочка связанных таблиц -->
     <div style="text-align: center;">
-    <h3>Цепочка связанных таблиц</h3>
+    <h3 id=10>Цепочка связанных таблиц</h3>
 
 
                         <!-- номер 1. Распишите структуру хранения -->
@@ -808,7 +817,7 @@
 
 <!-- Связывание через таблицу связи -->
     <div style="background-color: Gainsboro; text-align: center;">
-    <h3>Связывание через таблицу связи</h3>
+    <h3 id=11>Связывание через таблицу связи</h3>
 
     
                         <!-- номер 1. Распишите структуру хранения -->
@@ -890,7 +899,7 @@
         
 <!-- Родственные связи данных -->
     <div style="text-align: center;">
-    <h3>Родственные связи данных</h3>    
+    <h3 id=12>Родственные связи данных</h3>    
 
                         <!-- номер 1. Распишите структуру хранения -->
     <div style="display: flex; justify-content: center;"> 
@@ -963,7 +972,7 @@
 
 <!-- Несколько потомков в родственных связях -->
     <div style="background-color: Gainsboro; text-align: center;">
-    <h3>Несколько потомков в родственных связях</h3>
+    <h3 id=13>Несколько потомков в родственных связях</h3>
 
 
                                 <!-- номер 1. Распишите структуру хранения -->
@@ -1042,7 +1051,7 @@
 
 <!-- Практика на организацию баз данных-->
     <div style="text-align: center;">
-    <h3>Практика на организацию баз данных</h3>
+    <h3 id=14>Практика на организацию баз данных</h3>
 
     
                         <!-- номер 1. Распишите структуру хранения: моря, реки и их притоки -->
@@ -1258,7 +1267,7 @@
 
     Cтруктура хранения Генеологическое дерево: Пользователь, его бабушки, дедушки, мама, папа и т.д.
     <div style="display: flex; justify-content: center;"> 
-        <div style="width: 15%; border: 1px solid grey; 
+        <div style="width: 20%; border: 1px solid grey; 
                     margin: 5px; text-align: left; padding: 2px">
             <b>family_members:</b>
             <ul>
@@ -1267,7 +1276,7 @@
             </ul>
         </div>
 
-        <div style="width: 15%; border: 1px solid grey; 
+        <div style="width: 35%; border: 1px solid grey; 
                     margin: 5px; text-align: left; padding: 2px">
             <b>relationship:</b>
             <ul>
@@ -1280,84 +1289,195 @@
         </div>
     </div>
 
+
+
+
+         <!-- ----- Первая 17 - Практика БД ------  -->
+
+
+<!-- Оформление вывода из базы данных -->
+<div id='15'style="background-color: Gainsboro; text-align: center;">
+    <h3 id="15">Оформление вывода из базы данных</h3>
+
+                                                        <!-- Номер 1 -->
+    <?php                      
+    echo "Задание 1";
+    $query = "SELECT * FROM test";
+    $res = mysqli_query($link, $query);
+    for ($data = []; $row = mysqli_fetch_assoc($res); $data[] = $row);
+    ?>
+
+    <?php foreach ($data as $elem): ?> 
+        <div>
+	        <h2><?php echo $elem['name'] ?></h2>
+	        <p>
+		    <?php echo $elem['age'] ?> years, <b><?php echo $elem['salary'] ?>$</b>
+	        </p>
+        </div>
+    <?php endforeach ?><hr> 
+
+
+                                                        <!-- Номер 2 -->
+    <?php 
+        $query = "SELECT * FROM test";
+        echo "задание 2";
+        showTableUsers($link, $query); 
+     ?>
+    <br><hr> 
+
+                                                        <!-- Номер 3 -->
+    <?php                      
+    echo "Задание 3";
+    $query = "SELECT * FROM test";
+    $res = mysqli_query($link, $query);
+    for ($data = []; $row = mysqli_fetch_assoc($res); $data[] = $row);
+    ?>
+
+    <div style="display: flex; justify-content: center;"> 
+        <div style="width: 15%; border: 1px solid grey; 
+                    margin: 5px; text-align: left; padding: 2px">
+    <ul>
+        <?php foreach ($data as $elem): ?> 
+	        <li><?php echo $elem['name'] ?></li>
+        <?php endforeach ?>
+    </ul>
+
+    </div>
+    </div>
+</div>
+
+
+<!-- Удаление данных из БД с помощью GET запросов -->
+<div style="text-align: center;">
+    <h3 id="delete">Удаление данных из БД с помощью GET запросов</h3>
+  
     
+                                        <!-- Номер 1. Удалить по id в input -->
+    <form action="#"   method="GET">                      
+        <label for="id">Введите id пользователя: </label>
+        <input name='del' id="id">
+        <button type="submit" formaction="#delete">Удалить</button>
+    </form>
+
+    <?php 
+        if (!empty($_GET['del'])) {
+            $del = $_GET['del'];
+            $query = "DELETE FROM test WHERE id='$del'";
+            mysqli_query($link, $query) or die(mysqli_error($link));
+        }
+    ?>
+    <br><hr> 
+
+                                <!-- Номер 2, 3. Список из имен - удаление -->
+    <?php 
+    $query = "SELECT * FROM test";
+    $res = mysqli_query($link, $query) or die(mysqli_error($link));
+    for ($data=[]; $row=mysqli_fetch_assoc($res); $data[]=$row);
+    ?>  
+
+    Выберите пользователя из списка, чтобы удалить запись из БД:<br><br>
+    <div style="display: inline-block; 
+                border: 1px solid gray; width: 15%">
+    <ul>
+        <?php foreach ($data as $user): ?>                                        
+            <li><a href="?del_list=<?php echo $user['id'] ?>"><?php echo $user['name'];?></a></li>
+        <?php endforeach ?>   
+    </ul>
+    </div>
+
+    <?php 
+        if (!empty($_GET['del_list'])) {
+           $del_list = $_GET['del_list'];
+           $query = "DELETE FROM test WHERE id='$del_list'";
+           mysqli_query($link, $query) or die(mysqli_error($link));
+       }
+    ?>
+    <br><br><hr> 
+
+                        <!-- Номер 4. Ссылка "Удалить" прямо в таблице -->
+<?php 
+    $query = "SELECT * FROM test";
+    $res = mysqli_query($link, $query) or die(mysqli_error($link));
+    for ($data=[]; $row=mysqli_fetch_assoc($res); $data[]=$row);
+    ?>   
+
+    Выберите запись в таблице, которую хотите удалить:<br><br>
+    <table border="2" style="width: 50%; margin: 0 auto;">
+        <tr>
+            <th>id</th>
+		    <th>name</th>
+		    <th>age</th>
+		    <th>salary</th>
+		    <th>delete</th>
+        </tr>    
+        <?php foreach ($data as $user): ?>  
+        <tr>                                          
+            <tr>
+		    <td><?php echo $user['id'] ?></td>
+		    <td><?php echo $user['name'] ?></td>
+		    <td><?php echo $user['age'] ?></td>
+		    <td><?php echo $user['salary'] ?></td>
+		    <td><a href="?del_list=<?php echo $user['id'] ?>">удалить</a></td>
+	    </tr>
+        <?php endforeach ?>   
+    </table>
+
+    <?php 
+        if (!empty($_GET['del_list'])) {
+           $del_list = $_GET['del_list'];
+           $query = "DELETE FROM test WHERE id='$del_list'";
+           mysqli_query($link, $query) or die(mysqli_error($link));
+       }
+    ?>
+
+    
+<!-- Просмотр данных из БД -->
+<div style="background-color: Gainsboro; text-align: center;">
+    <h3>Просмотр данных из БД</h3>
+
+
+                                                        <!-- Номер 1 -->
+    <form action="show.php" method="GET">
+        <label for='id'>Просмотреть юзера по id:</label>
+        <input name="id" id='id'>
+        <input type='submit'>
+    </form>
+    <br><hr> 
+                                                        <!-- Номер 2 -->
+    
+    <?php 
+        $query = "SELECT * FROM test";
+        $res = mysqli_query($link, $query) or die(mysqli_error($link));
+        for ($data=[]; $row=mysqli_fetch_assoc($res); $data[]=$row);
+    ?>  
+    Выберите пользователя для просмотра данных:<br>
+    <?php foreach ($data as $user): ?>                                        
+        <a href="show.php?id=<?php echo $user['id'] ?>"><?php echo $user['name']?></a>
+    <?php endforeach ?>   
+    <br><br>
+    
+</div>
 
 
+<!-- Добавление новой записи в БД-->
+<div style="text-align: center;">
+    <h3 id="1">Добавление новой записи в БД</h3>
 
+    <a href="new.php">Добавить нового юзера</a>
 
 
+<!-- Редактирование записи в БД -->
+<div style="background-color: Gainsboro; text-align: center;">
+    <h3 id="delete">Редактирование записи в БД</h3>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <form action="edit.php" method="GET">                      
+        <label for="id">Введите id пользователя: </label>
+        <input name='id' id="id">
+        <button type="submit">Редактировать</button>
+    </form>
+    <br>
+</div>
 
 
 

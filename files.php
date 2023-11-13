@@ -80,6 +80,7 @@
     <div style="Gainsboro; text-align: center;">
     <h3>Относительные пути в PHP</h3>
 
+
     <?php                                              // Номер 1
         echo file_get_contents('dir1/dir2/test.txt');
     ?>   
@@ -349,7 +350,7 @@
             echo "Папка dir3 перенесана в папку dir";
         } elseif (is_dir($path . 'dir/dir3')) {
             rename($path . 'dir/dir3', $path . 'dir3');
-            echo "Папка test3 переименована обратно в каталог file_exercises";
+            echo "Папка dir3 перенесенаы обратно в каталог file_exercises";
         } 
     ?>
     </div>

@@ -494,18 +494,21 @@
 	<div style="text-align: center;">
 	<h3>Сохранение значения в селектах после отправки</h3>
 
-	Пишем в адресной строке ?par1=1&par1=2 (или другие значения)<br>
 	<?php
-	echo $_GET["par1"] . '<br>';
-	echo ($_GET["par1"] ** 2)  . '<br>';
-	echo ($_GET["par1"] + $_GET["par2"])  . '<br>';
-	if ($_GET["par1"] === "1") {
-		echo 'hello <br>';
-	} elseif (($_GET["par1"] === '2')) {
-		echo 'bye <br>';
+	if (isset($_GET["par1"])) {
+		echo $_GET["par1"] . '<br>';
+		echo ($_GET["par1"] ** 2)  . '<br>';
+		echo ($_GET["par1"] + $_GET["par2"])  . '<br>';
+		if ($_GET["par1"] === "1") {
+			echo 'hello <br>';
+		} elseif (($_GET["par1"] === '2')) {
+			echo 'bye <br>';
+		}
+		$arr = ['a', 'b', 'c', 'd', 'e'];
+		echo $arr[$_GET["par1"]];
+	} else {
+		echo "Пишем в адресной строке ?par1=1&par1=2 (или другие значения)<br>";
 	}
-	$arr = ['a', 'b', 'c', 'd', 'e'];
-	echo $arr[$_GET["par1"]];
 	?>
 
 
@@ -518,20 +521,25 @@
 	<a href="?number=2">Число 2</a>
 	<a href="?number=3">Число 3</a>
 	<br>
-	<?php echo $_GET["number"]?>
+	<?php 
+	if (!empty($_GET) and isset($_GET["number"])) {
+		echo $_GET["number"];
+	}
+	?>
+	
 	<br>
 	<br>
 
 
 	<?php   								// номер 2
 	for ($i=1; $i<=10; $i++): ?>
-		<a href="<?= '?num=' . $i ?>"><?='Число ' . $i . " " ?></a>
+		<a href="<?= '?num8=' . $i ?>"><?='Число ' . $i . " " ?></a>
 	<?php endfor ?>
 
 	<?php 
-	if (!empty($_GET)) {
+	if (!empty($_GET) and isset($_GET["num8"])) {
 		echo '<br>';
-		echo ($_GET["num"]);
+		echo $_GET["num8"];
 	} 
 	?>
 	<br><br>
@@ -544,8 +552,8 @@
 	}
 	?>
 
-<?php 
-	if (!empty($_GET)) {
+	<?php 
+	if (!empty($_GET) and isset($_GET["letter"])) {
 		echo '<br>';
 		echo ($_GET["letter"]);
 	} 
