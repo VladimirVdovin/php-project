@@ -22,5 +22,9 @@
         <li style="display: inline; margin-right: 20px; color: white;">
              <a href="db.php" style="color: white; text-decoration: none;">
                 БД (bd.php)</a></li>
+        <li style="display: inline; margin-right: 20px; color: white;">
+             <a href="http.php" style="color: white; text-decoration: none;">
+                HTTP (http.php)</a></li>
+
     </ul>
 </nav>

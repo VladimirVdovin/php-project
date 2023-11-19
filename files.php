@@ -26,8 +26,8 @@
     <h3>Чтение файлов в PHP</h3>
 
     <?php
-        $content1 = intval(file_get_contents('files_exercises\1.txt'));
-        $content2 = intval(file_get_contents('files_exercises\2.txt'));
+        $content1 = intval(file_get_contents('files_exercises/1.txt'));
+        $content2 = intval(file_get_contents('files_exercises/2.txt'));
 
 	    echo "Сумма чисел из файлов 1.txt и 2.txt равна " . 
         ($content1 + $content2);
@@ -224,7 +224,7 @@
         ?>
 
         <?php                                           // Номер 3
-            $size = round(filesize("public\img\picture.jpg") / (1024 * 1024), 2);
+            $size = round(filesize("public/img/picture.jpg") / (1024 * 1024), 2);
             echo "Размер файла picture.jpg: $size мегабайта<br>";
         ?>
 
@@ -489,7 +489,7 @@
                 return ob_get_clean();
             }
 
-            $res_getWeekday = getWeekday('files_exercises\dir\weekdays\weekdays.php');
+            $res_getWeekday = getWeekday('files_exercises/dir/weekdays/weekdays.php');
             echo $res_getWeekday;
         ?>
 
@@ -499,7 +499,7 @@
     <h3>Подключение файлов</h3>
 
     <?php 
-        require 'includes\functions.php';
+        require 'includes/functions.php';
 
         echo "Подключенная функция calcMinusOne: " . calcMinusOne(10) . '<br>';
         echo "Подключенная функция calcPlusFive: " . calcPlusFive(10) . '<br>';
@@ -517,7 +517,7 @@
 
     <?php 
     
-        require_once 'includes\new_functions.php';
+        require_once 'includes/new_functions.php';
         print_r(calsMinusPlus([1,2,3,4,5]));
 
     ?>
@@ -527,7 +527,7 @@
     <h3>Запись подключения в переменную</h3>
     
     <?php 
-        $week = require_once "files_exercises\dir\weekdays\months.php";
+        $week = require_once "files_exercises/dir/weekdays/months.php";
         print_r($week);
     ?>        
     

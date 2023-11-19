@@ -21,6 +21,12 @@
 закомментировал -->
 
 <?php
+
+    setcookie('test', 'Проверка. Куки работают');
+
+    setcookie('str', "Надпись появиться только  
+    после перезагрузки страницы");
+
     if (!isset($_COOKIE['str']))
 	 setcookie('str1', 'Надпись появится сразу');
 
@@ -230,7 +236,7 @@
         }
     ?>
 
-    <form type="GET">
+    <form method="GET">
         <label for="name2">Имя</label>
         <input name="name2" id="name2">
         <br>
@@ -266,19 +272,19 @@
 
 
     <?php
-	    setcookie('test', 'Проверка. Куки работают');
+	    // setcookie('test', 'Проверка. Куки работают');
     ?>
-    <a href='test2.php'>Провери куки на test2</a>
 
+    <a href='test2.php'>Проверить куки на test2</a>
 </div>
 
-<!-- Проблема установки кук  -->
+    <!-- Проблема установки кук  -->
 <div style="background-color: Gainsboro; text-align: center;">         
 	<h3>Проблема установки кук</h3> 
 
     <?php
-        setcookie('str', "Надпись появиться только  
-            после перезагрузки страницы");
+        // setcookie('str', "Надпись появиться только  
+        //     после перезагрузки страницы");
         print_r($_COOKIE["str"]);
     ?>
 
@@ -349,7 +355,7 @@
     </div>
 
 
-<!-- УМгновенное удаление кук  -->
+<!-- Мгновенное удаление кук  -->
 <div style="text-align: center;">         
 	<h3>Мгновенное удаление кук</h3> 
 

@@ -380,7 +380,7 @@
             $check = mysqli_query($link, "SELECT * FROM users WHERE name='xxxx'");
             if ($check->num_rows == 0) {
                 $query = "INSERT INTO users (name) VALUES ('xxxx')";
-                mysqli_query($link, $query) or die(msqli_error($link));
+                mysqli_query($link, $query) or die(mysqli_error($link));
             } 
             $check = mysqli_query($link, 'SELECT * FROM users WHERE name="xxxx"');
             echo "Новая запись без полей age и salary: <br>";
@@ -460,11 +460,20 @@
     <?php                                              // номер 3
         echo "Удаление всех записей:<br> ";
         $query = "DELETE FROM users";
-        mysqli_query($link, $query);
+        $res = mysqli_query($link, $query);
     ?>
 
-    <?php showTableUsers($link) ?>
-    <?php getDefaultTable($link) ?>
+
+    <?php 
+  
+    if ($res != true) {
+        showTableUsers($link);
+    } else {
+        echo "Все записи из таблицы users удалены";
+        getDefaultTable($link);
+    }
+    ?>
+        
             
     </div>
 
@@ -1478,6 +1487,15 @@
     </form>
     <br>
 </div>
+
+
+
+
+
+
+
+
+
 
 
 

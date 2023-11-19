@@ -24,15 +24,18 @@
 	<h3>Основы работы с формами в PHP</h3>
 
 <form>
-    <label for="name">Имя пользователя</label>
-    <input id='name', name='name'>
-    <br><br>
-    <label for="age">Возраст</label>
-    <input id='age', name='age'>
-    <br><br>
-    <label for="income">Доход</label>
-    <input id='income', name='income'>
-    <br><br>
+	<div style='display: flex; justify-content: center;'>
+		<div class="form-group">	
+			<label for="name">Имя</label><br>
+    		<label for="age">Возраст</label><br>
+			<label for="income">Доход</label><br>
+		</div>
+		<div class="form-group">	
+    		<input id='age', name='age'><br>
+			<input id='name', name='name'><br>
+			<input id='income', name='income'><br>
+		</div>
+	</div>
     <input type='submit'>
 </form>
 
@@ -112,17 +115,17 @@
 	<h3>Обработка формы в одном файле</h3>
 
 	<form method="GET">
-		<input name="name">
-		<input name="surname">
-		<input name="fathername">
+		<input name="name5">
+		<input name="surname5">
+		<input name="fathername5">
 		<input type="submit">
 	</form>
 
 	<br>
 
 	<?php
-	if (!empty($_GET)) {
-		echo $_GET['surname'] . ' ' . $_GET['name'] . ' ' . $_GET['fathername']; 
+	if (!empty($_GET) and (isset($_GET['name5']))) {
+		echo $_GET['surname5'] . ' ' . $_GET['name5'] . ' ' . $_GET['fathername5']; 
 	}	
 	?>
 	</div>
@@ -160,7 +163,7 @@
 	</form>
 
 	<?php
-	if (!empty($_GET)) {
+	if (!empty($_GET) and isset($_GET['town'])) {
 		echo $_GET['town'] . ', ' . $_GET['country'];
 	}	
 	?>
@@ -219,11 +222,11 @@
 	</form>
 
 	<?php 
-	if (empty($_GET)) {
-		echo "До нового года осталось " . (365 - date('z', $current_time)) . " дней";
-	} else {
+	if (!empty($_GET) and isset($_GET['year2'])) {
 		$user_time = strtotime($_GET['year2'] . '-' . $_GET["month2"] . '-' . $_GET['day2']);
 		echo "До нового года осталось " . (365 - date('z', $user_time)) . " дней";
+	} else {
+		echo "До нового года осталось " . (365 - date('z', $current_time)) . " дней";
 	}
 	?>
 	</div>
@@ -239,7 +242,7 @@
 		<input type="submit">
 	</form>
 
-	<?php if ($_GET['test']) {
+	<?php if (!empty($_GET['test'])) {
 		echo $_GET['test'];
 	}
 	?>
@@ -269,7 +272,7 @@
 		return strtr($str, $dict);
 	}
 
-	if ($_GET["translit"]) {
+	if (!empty($_GET["translit"])) {
 		echo translit($_GET["translit"]);
 	}
 	?>
@@ -282,18 +285,20 @@
 
 
 	<form action="" method="GET">
-		<input type="checkbox" name="flag">
-		<input name="name4">
+		<label for="privet">Привет или пока?</label>
+		<input type="checkbox" id="privet" name="flag"><br><br>
+		<label for="name4">Введите имя</label>
+		<input name="name4" id="name4">
 		<input type="submit">
 	</form>
 
 	<?php 
-	if (!empty($_GET)) {
+	if (!empty($_GET) and isset($_GET['name4'])) {
 		if (isset($_GET['flag'])) {
 			echo 'Привет, ' . $_GET['name4'];
 		} else {
-			echo 'Пока, ' . $_GET['name4'];;
-		}
+			echo 'Пока, ' . $_GET['name4'];
+		} 
 	}
 	?>
 	</div>
@@ -370,11 +375,17 @@
 		<input type="submit">
 	</form>
 
-	<?php if ($_GET['radio'] === "1") {
-		echo "Вы выбрали Ж";
-	} elseif ($_GET['radio'] === "2") {
-		echo "Вы выбрали М";
+	
+	<?php 
+	if (!empty($_GET) and isset($_GET["radio"])) {
+		if ($_GET["radio"] === "1") {
+			echo "Вы выбрали Ж";
+		} elseif ($_GET["radio"] === "2") {
+			echo "Вы выбрали М";
+		}
 	}
+	
+
 	?>
 	<br>
 	</div>
@@ -388,26 +399,30 @@
 	Выберите язык: 
 	<form action="" method="GET">
 		<label for="rus">Русский</label>
-		<input type="radio" name="radio" value="1" id="rus" <?php 
-			if (!empty($_GET["radio"]) and $_GET["radio"] === "1") 
+		<input type="radio" name="radio1" value="1" id="rus" <?php 
+			if (!empty($_GET["radio1"]) and $_GET["radio1"] === "1") 
 				echo 'checked' ?>>
 		<label for="eng">Английский</label>
-		<input type="radio" name="radio" value="2" id="eng" <?php 
-			if (!empty($_GET["radio"]) and $_GET["radio"] === "2") 
+		<input type="radio" name="radio1" value="2" id="eng" <?php 
+			if (!empty($_GET["radio1"]) and $_GET["radio1"] === "2") 
 				echo 'checked' ?>>
 		<label for="srb">Сербский</label>
-		<input type="radio" name="radio" value="3" id="srb" <?php 
-			if (!empty($_GET["radio"]) and $_GET["radio"] === "3") 
+		<input type="radio" name="radio1" value="3" id="srb" <?php 
+			if (!empty($_GET["radio1"]) and $_GET["radio1"] === "3") 
 				echo 'checked' ?>>
+		<br>
 		<input type="submit">
 	</form>
 
-	<?php if ($_GET['radio'] === "1") {
-		echo "Вы выбрали русский";
-	} elseif ($_GET['radio'] === "2") {
-		echo "Вы выбрали английский";
-	} else {
-		echo "Вы выбрали сербский";
+	<?php 
+		if (!empty($_GET) and isset($_GET["radio1"])) {
+			if ($_GET['radio1'] === "1") {
+				echo "Вы выбрали русский";
+			} elseif ($_GET['radio1'] === "2") {
+				echo "Вы выбрали английский";
+			} else {
+				echo "Вы выбрали сербский";
+		}	
 	}
 	?>
 	</div>
@@ -469,13 +484,13 @@
 	<form action="" method="GET">
 	<select name="select2">
 		<option value="русский" <?php
-			if (!empty($_GET) and $_GET["select2"] === "русский") {
+			if (!empty($_GET) and isset($_GET["select2"]) and $_GET["select2"] === "русский") {
 				echo "selected"; } ?>>Русский</option>
 		<option value="сербский" <?php
-			if (!empty($_GET) and $_GET["select2"] === "сербский") {
+			if (!empty($_GET) and isset($_GET["select2"]) and $_GET["select2"] === "сербский") {
 				echo "selected"; } ?>>Сербский</option>
 		<option value="английский" <?php
-			if (!empty($_GET) and $_GET["select2"] === "английский") {
+			if (!empty($_GET) and isset($_GET["select2"]) and $_GET["select2"] === "английский") {
 				echo "selected"; } ?>>Английский</option>
 	</select>
 	<input type="submit">
@@ -902,6 +917,12 @@
 
 	}	
 ?>
+
+
+
+
+
+		<br><br>
 
         <footer>
 			<?php include 'includes/footer.php'; ?>
