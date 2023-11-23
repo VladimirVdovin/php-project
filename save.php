@@ -33,7 +33,8 @@
 
                         <!-- Номер 2. Реализуйте save для сохранения -->
                
-        <?php 
+        <?php
+        echo 'Редактирование записи:<br>';
         $link = mysqli_connect($db_host, $db_user, $db_pass, $db_name)
                     or die(mysqli_connect_error($link));
         $id = $_GET['id'];
@@ -45,6 +46,9 @@
         $res = mysqli_query($link, $query) or die(mysqli_error($link));
         echo 'юзер успешно изменен!';
         ?>    
+
+
+
   
 </main>
 

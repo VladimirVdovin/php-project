@@ -122,9 +122,6 @@
             }
             $status = http_response_code();
             echo 'Текущий статус запроса: ' . $status;
-            
-
-        
         }
 
         ?>

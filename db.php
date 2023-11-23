@@ -32,6 +32,16 @@
 
         <br>
 
+        <?php
+        session_start();
+        // Этот блок относится к заданию по редиректам
+        // Он выводит флеш сообщение 
+        if (!empty($_SESSION["flash"])) {
+            echo "<p style='background-color: green; color: white;'> {$_SESSION['flash']} </p>" . "<br>";
+            unset($_SESSION["flash"]);
+        }
+        ?>
+
 
 
          <!-- ----- Первая 15 - Базы данных ------  -->
@@ -649,11 +659,9 @@
     <h3 id=9>Связывание таблиц в базах данных</h3>
 
     
-                                                    <!-- номер 1 -->
-    <div style="display: flex; justify-content: center;"> 
-        
-        <div style="width: 30%; border: 1px solid grey; 
-                    margin: 5px; text-align: left; padding: 2px">
+                                            <!-- номер 1 -->
+    <div class="scheme"> 
+        <div>
             <b>Товары:</b>
             <ul>
                 <li>id (PRIMARY KEY)</li>
@@ -664,8 +672,7 @@
             </ul>
         </div>
 
-        <div style="width: 30%; border: 1px solid grey; 
-                    margin: 5px; text-align: left; padding: 2px">
+        <div>
             <b>Категории товаров:</b>
             <ul>
                 <li>category_id (PRIMARY KEY)</li>
@@ -675,10 +682,9 @@
     </div>
 
     <br>
-                                                      <!-- номер 2 -->
-    <div style="display: flex; justify-content: center;"> 
-        <div style="width: 30%; border: 1px solid grey; 
-                    margin: 5px; text-align: left; padding: 2px">
+                                            <!-- номер 2 -->
+    <div class="scheme"> 
+        <div>
             <b>Реки:</b>
             <ul>
                 <li>id (PRIMARY KEY)</li>
@@ -689,8 +695,7 @@
             </ul>
         </div>
 
-        <div style="width: 30%; border: 1px solid grey; 
-                    margin: 5px; text-align: left; padding: 2px">
+        <div>
             <b>Моря:</b>
             <ul>
                 <li>sea_id (PRIMARY KEY)</li>
@@ -703,10 +708,9 @@
 
 
     <br>
-                                                      <!-- номер 3 -->
-    <div style="display: flex; justify-content: center;"> 
-        <div style="width: 30%; border: 1px solid grey; 
-                    margin: 5px; text-align: left; padding: 2px">
+                                                <!-- номер 3 -->
+    <div class="scheme"> 
+        <div>
             <b>Города:</b>
             <ul>
                 <li>id (PRIMARY KEY)</li>
@@ -717,8 +721,7 @@
             </ul>
         </div>
 
-        <div style="width: 30%; border: 1px solid grey; 
-                    margin: 5px; text-align: left; padding: 2px">
+        <div>
             <b>Страны:</b>
             <ul>
                 <li>country_id (PRIMARY KEY)</li>
@@ -763,9 +766,8 @@
 
 
                         <!-- номер 1. Распишите структуру хранения -->
-    <div style="display: flex; justify-content: center;"> 
-        <div style="width: 25%; border: 1px solid grey; 
-                    margin: 5px; text-align: left; padding: 2px">
+    <div class="scheme"> 
+        <div>
             <b>Product:</b>
             <ul>
                 <li>id_product (PRIMARY KEY)</li>
@@ -776,8 +778,7 @@
             </ul>
         </div>
 
-        <div style="width: 25%; border: 1px solid grey; 
-                    margin: 5px; text-align: left; padding: 2px">
+        <div>
             <b>Subcategory:</b>
             <ul>
                 <li>id (PRIMARY KEY)</li>
@@ -786,8 +787,7 @@
             </ul>
         </div>
 
-        <div style="width: 25%; border: 1px solid grey; 
-                    margin: 5px; text-align: left; padding: 2px">
+        <div>
             <b>Category:</b>
             <ul>
                 <li>category_id (PRIMARY KEY)</li>
@@ -830,9 +830,8 @@
 
     
                         <!-- номер 1. Распишите структуру хранения -->
-    <div style="display: flex; justify-content: center;"> 
-        <div style="width: 25%; border: 1px solid grey; 
-                    margin: 5px; text-align: left; padding: 2px">
+    <div class="scheme"> 
+        <div>
             <b>Product:</b>
             <ul>
                 <li>id_product (PRIMARY KEY)</li>
@@ -843,8 +842,7 @@
             </ul>
         </div>
 
-        <div style="width: 25%; border: 1px solid grey; 
-                    margin: 5px; text-align: left; padding: 2px">
+        <div>
             <b>Таблица связи product_subcategory:</b>
             <ul>
                 <li>id (PRIMARY KEY)</li>
@@ -853,8 +851,7 @@
             </ul>
         </div>
 
-        <div style="width: 25%; border: 1px solid grey; 
-                    margin: 5px; text-align: left; padding: 2px">
+        <div>
             <b>Subcategory:</b>
             <ul>
                 <li>id (PRIMARY KEY)</li>
@@ -911,9 +908,8 @@
     <h3 id=12>Родственные связи данных</h3>    
 
                         <!-- номер 1. Распишите структуру хранения -->
-    <div style="display: flex; justify-content: center;"> 
-        <div style="width: 25%; border: 1px solid grey; 
-                    margin: 5px; text-align: left; padding: 2px">
+    <div class="scheme"> 
+        <div>
             <b>family:</b>
             <ul>
                 <li>id (PRIMARY KEY)</li>
@@ -985,9 +981,8 @@
 
 
                                 <!-- номер 1. Распишите структуру хранения -->
-    <div style="display: flex; justify-content: center;"> 
-        <div style="width: 25%; border: 1px solid grey; 
-                    margin: 5px; text-align: left; padding: 2px">
+    <div class="scheme"> 
+        <div>
             <b>family:</b>
             <ul>
                 <li>id (PRIMARY KEY)</li>
@@ -1065,9 +1060,8 @@
     
                         <!-- номер 1. Распишите структуру хранения: моря, реки и их притоки -->
     Cтруктура хранения: моря, реки и их притоки
-    <div style="display: flex; justify-content: center;"> 
-        <div style="width: 25%; border: 1px solid grey; 
-                    margin: 5px; text-align: left; padding: 2px">
+    <div class="scheme"> 
+        <div>
             <b>Реки:</b>
             <ul>
                 <li>id_river (PRIMARY KEY)</li>
@@ -1077,8 +1071,7 @@
             </ul>
         </div>
 
-        <div style="width: 25%; border: 1px solid grey; 
-                    margin: 5px; text-align: left; padding: 2px">
+        <div>
             <b>Моря:</b>
             <ul>
                 <li>id (PRIMARY KEY)</li>
@@ -1090,9 +1083,8 @@
 
                             <!-- номер 2. Распишите структуру хранения: пользователь, обмен сообщениями -->
     Структура хранения: пользователь, обмен сообщениями
-    <div style="display: flex; justify-content: center;"> 
-        <div style="width: 35%; border: 1px solid grey; 
-                    margin: 5px; text-align: left; padding: 2px">
+    <div class="scheme"> 
+        <div>
             <b>User:</b>
             <ul>
                 CREATE TABLE user 
@@ -1102,8 +1094,7 @@
             </ul>
         </div>
 
-        <div style="width: 35%; border: 1px solid grey; 
-                    margin: 5px; text-align: left; padding: 2px">
+        <div>
             <b>Message:</b>
             <ul>
                 CREATE TABLE message
@@ -1120,9 +1111,8 @@
 
                                 <!-- номер 3. Футбольный сайт: даты игра, команды с игроками -->
     Футбольный сайт: даты игра, команды с игроками
-    <div style="display: flex; justify-content: center;"> 
-        <div style="width: 30%; border: 1px solid grey; 
-                    margin: 5px; text-align: left; padding: 2px">
+    <div class="scheme"> 
+        <div>
             <b>Game:</b>
             <ul>
                 CREATE TABLE game
@@ -1136,8 +1126,7 @@
             </ul>
         </div>
 
-        <div style="width: 30%; border: 1px solid grey; 
-                    margin: 5px; text-align: left; padding: 2px">
+        <div>
             <b>Team1:</b>
             <ul>
                 CREATE TABLE team1
@@ -1148,8 +1137,7 @@
             </ul>
         </div> 
 
-        <div style="width: 30%; border: 1px solid grey; 
-                    margin: 5px; text-align: left; padding: 2px">
+        <div>
             <b>Team2:</b>
             <ul>
                 CREATE TABLE team2
@@ -1163,7 +1151,7 @@
 
 
     Cтруктура хранения Форум: категории, темы, посты, авторы, сообщения
-    <div style="display: flex; justify-content: center;"> 
+    <div class="scheme"> 
         <div style="width: 15%; border: 1px solid grey; 
                     margin: 5px; text-align: left; padding: 2px">
             <b>category:</b>
@@ -1219,7 +1207,7 @@
 
 
     Cтруктура хранения Соцсеть: юзер, друзья, стена, комментарии, сообщения
-    <div style="display: flex; justify-content: center;"> 
+    <div class="scheme"> 
         <div style="width: 15%; border: 1px solid grey; 
                     margin: 5px; text-align: left; padding: 2px">
             <b>users:</b>
@@ -1275,7 +1263,7 @@
 
 
     Cтруктура хранения Генеологическое дерево: Пользователь, его бабушки, дедушки, мама, папа и т.д.
-    <div style="display: flex; justify-content: center;"> 
+    <div class="scheme"> 
         <div style="width: 20%; border: 1px solid grey; 
                     margin: 5px; text-align: left; padding: 2px">
             <b>family_members:</b>
@@ -1342,7 +1330,7 @@
     for ($data = []; $row = mysqli_fetch_assoc($res); $data[] = $row);
     ?>
 
-    <div style="display: flex; justify-content: center;"> 
+    <div class="scheme"> 
         <div style="width: 15%; border: 1px solid grey; 
                     margin: 5px; text-align: left; padding: 2px">
     <ul>

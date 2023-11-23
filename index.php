@@ -15,6 +15,26 @@
 			<?php include 'includes/slidebar.php'; ?>
 		</aside>
 
+		<br>
+
+		<?php
+			// Код для упражнения по теме Редирект
+            // Исполняется только при редиректе с result.php
+            // Передает парамерт succes
+            $referer_file = strrchr($_SERVER['HTTP_REFERER'], '/');
+            if ($referer_file == '/http.php' and isset($_GET['redirect'])) {
+                if (isset($_GET['par'])) {
+					echo '<b style="background-color:SpringGreen">' . $_GET['par'] . " - 
+					редирект http.php -> result.http -> index.http c параметром выполнен успешно!</b>";
+				} else {
+					echo '<b style="background-color:SpringGreen">
+					Редирект http.php -> result.http -> index.http  выполнен успешно!</b>';
+				}
+			}
+
+
+		?>
+
 		<main>
 			<?php include 'code.php';?> 
 		</main>

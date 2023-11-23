@@ -17,6 +17,21 @@
 
         <br>
 
+        <?php session_start() ?>
+
+        <?php  // код для задачи по теме редиректы. Выводим массив флеш сообщений
+            if ($_GET['redirect' == true]) {
+                $referer = strrchr($_SERVER['HTTP_REFERER'], "/");
+                if ($referer == "/http.php" and !empty($_SESSION['arr_flash'])) {
+                    foreach ($_SESSION['arr_flash'] as $flash) {
+                        echo "<p style='background-color: green; color: white;'> $flash </p>";
+                    }   
+                $_SESSION['arr_flash'] = []; 
+          
+                }
+            }
+        ?>
+
 
 <!-- ------- Глава 14 - Файловая система ---------->
 

@@ -6,6 +6,21 @@
 	</head>
 	<body>
         <?php
+            // Код для упражнений по теме Редирект
+            // Исполняется только при переходе с http.php
+            // Редирект на index.php
+            $referer_file = strrchr($_SERVER['HTTP_REFERER'], '/');
+            if ($referer_file == '/http.php' and isset($_GET['redirect'])) {
+                $addr = 'index.php';
+                if (!isset($_GET['par'])) {             // без параметра 
+                    header("Location: " . $addr . "?redirect=true");
+                } else {
+                    $par=$_GET['par'];                  // с параметром
+                    header("Location: " . $addr . "?par=" . $par . "&redirect=true");
+                }
+                die();
+            }
+            
 
             if (isset($_GET["test1"]) and isset($_GET["test2"])) {
                 echo $_GET["test1"] . ' ' . $_GET["test2"];
