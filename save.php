@@ -1,42 +1,45 @@
 <?php
-    require_once __DIR__ . "/vendor/autoload.php"; 
-    use Dotenv\Dotenv;
+require_once __DIR__ . "/vendor/autoload.php";
 
-    $dotenve = Dotenv::createImmutable(__DIR__);
-    $dotenve->load();
+use Dotenv\Dotenv;
 
-    $db_host = $_ENV["DB_HOST"];
-    $db_user = $_ENV["DB_USER"];    
-    $db_pass = $_ENV["DB_PASS"];         
-    $db_name = $_ENV["DB_NAME"];   
+$dotenve = Dotenv::createImmutable(__DIR__);
+$dotenve->load();
+
+$dbHost = $_ENV["DB_HOST"];
+$dbUser = $_ENV["DB_USER"];
+$dbPass = $_ENV["DB_PASS"];
+$dbName = $_ENV["DB_NAME"];
 ?>
 
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>save</title>
-		<link rel="stylesheet" href="public/css/style.css">
-	</head>
-	<body style="text-align: center;">
-		<header>
-			<?php include 'includes/header.php'; ?>
-		</header>
 
-		<aside>
-		</aside>
+<head>
+    <meta charset="utf-8">
+    <title>save</title>
+    <link rel="stylesheet" href="public/css/style.css">
+</head>
 
-		<main>
-        <br><br>
+<body style="text-align: center;">
+    <header>
+        <?php include 'includes/header.php'; ?>
+    </header>
 
-<!-- Редкатирование записи в БД-->
+    <aside>
+    </aside>
 
-                        <!-- Номер 2. Реализуйте save для сохранения -->
-               
+    <main>
+
+    <br><br>
+
+        <!-- Редактирование записи в БД-->
+
+        <!-- Номер 2. Реализуйте save для сохранения -->
+
         <?php
         echo 'Редактирование записи:<br>';
-        $link = mysqli_connect($db_host, $db_user, $db_pass, $db_name)
-                    or die(mysqli_connect_error($link));
+        $link = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName) or die(mysqli_connect_error($link));
         $id = $_GET['id'];
         $name = $_POST['name'];
         $age = $_POST['age'];
@@ -45,19 +48,20 @@
                             salary='$salary' WHERE id='$id'";
         $res = mysqli_query($link, $query) or die(mysqli_error($link));
         echo 'юзер успешно изменен!';
-        ?>    
+        ?>
 
 
 
-  
-</main>
 
-<footer>
-    <?php include 'includes/footer.php'; ?>
-</footer>
+    </main>
 
-</br>
-</br>
+    <footer>
+        <?php include 'includes/footer.php'; ?>
+    </footer>
+
+    <br>
+    <br>
 
 </body>
+
 </html>
